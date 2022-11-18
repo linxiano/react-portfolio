@@ -1,33 +1,10 @@
 .bg-container {
-	// right: 10 px;
-	// top: 10 px;
-
 	height: 130vmax;
 	width: 130vmax;
 	position: absolute;
-
 	z-index: -1;
-	// min-height: 90vh;
-	// max-width: 90vh;
-
-	// display: flex;
-	// align-items: center;
-	// justify-content: center;
-
-	background: url('bg.jpg') no-repeat;
-	// background-size: 100%;
-	background-size: cover;
-	background-position: center center;
-}
-
-.bg-container2 {
-	height: 100vmax;
-	width: 100vmax;
-	position: absolute;
 
 	background: url('bg.jpg') no-repeat;
 	background-size: cover;
 	background-position: center center;
-
-	z-index: -1;
 }
