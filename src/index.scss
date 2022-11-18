@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap');
+
+$light: 300;
+$normal: 400;
+$semibold: 500;
+$bold: 700;
+
+$white: #fff;
+$dark: #000;
+
+body {
+	margin: 0;
+	height: 100vh;
+	overflow: hidden;
+
+	font-family: 'PT Sans Caption', sans-serif;
+	color: $white;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
