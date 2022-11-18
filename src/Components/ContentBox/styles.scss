@@ -1,0 +1,86 @@
+$theme-bg-color: rgba(16, 18, 27, 0.5);
+$spread: 10px;
+$blur: 78px;
+
+// $color: rgba(31, 0, 76, 0.86);
+$color: rgba(255, 0, 118, 0.67);
+// $color: rgba(16, 134, 232, 0.73);
+
+.content-border {
+	position: absolute;
+	// background-color: #fff;
+	height: 400px;
+	width: 600px;
+	z-index: -1;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 20px;
+
+	animation: border-flicker 2s linear infinite;
+}
+
+.content-container {
+	// background-color: rgba(0, 0, 0, 0.5);
+
+	background-color: $theme-bg-color;
+	backdrop-filter: blur(10px);
+	height: 400px;
+	width: 600px;
+	// margin: 20px;
+	// padding-top: 10px;
+	// padding-bottom: 10px;
+	display: flex;
+
+	border-radius: 20px;
+	// border-color: #3c67e3;
+	// border-width: 2px;
+	// border-style: solid;
+
+	.content-container-inner {
+		// background-color: #3c67e3;
+		flex: 1;
+		margin: 10px;
+	}
+}
+
+@keyframes border-flicker {
+	0% {
+		opacity: 0.1;
+		-webkit-box-shadow: 0px 0px $blur $spread $color;
+		-moz-box-shadow: 0px 0px $blur $spread $color;
+		box-shadow: 0px 0px $blur $spread $color;
+	}
+	2% {
+		opacity: 1;
+		-webkit-box-shadow: 0px 0px $blur $spread $color;
+		-moz-box-shadow: 0px 0px $blur $spread $color;
+		box-shadow: 0px 0px $blur $spread $color;
+	}
+	4% {
+		opacity: 0.1;
+		-webkit-box-shadow: 0px 0px $blur $spread $color;
+		-moz-box-shadow: 0px 0px $blur $spread $color;
+		box-shadow: 0px 0px $blur $spread $color;
+	}
+
+	8% {
+		opacity: 1;
+		-webkit-box-shadow: 0px 0px $blur $spread $color;
+		-moz-box-shadow: 0px 0px $blur $spread $color;
+		box-shadow: 0px 0px $blur $spread $color;
+	}
+	70% {
+		opacity: 0.7;
+		-webkit-box-shadow: 0px 0px $blur $spread $color;
+		-moz-box-shadow: 0px 0px $blur $spread $color;
+		box-shadow: 0px 0px $blur $spread $color;
+	}
+	100% {
+		opacity: 1;
+		-webkit-box-shadow: 0px 0px $blur $spread $color;
+		-moz-box-shadow: 0px 0px $blur $spread $color;
+		box-shadow: 0px 0px $blur $spread $color;
+	}
+}
