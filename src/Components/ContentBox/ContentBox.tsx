@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaBeer, FaBriefcase } from 'react-icons/fa';
+import { FaBriefcase, FaCaretRight } from 'react-icons/fa';
 
 import './styles.scss';
 
@@ -13,7 +13,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 	const navigate = useNavigate();
 
 	const small = { width: 600, height: 400 };
-	const big = { width: small.width * 1.3, height: small.height * 1.3 };
+	const big = { width: small.width * 1.5, height: small.height * 1.5 };
 
 	const [openState, setOpenState] = useState<boolean | undefined>(false);
 	const [growSize, setGrowSize] = useState(small);
@@ -22,7 +22,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 		openState ? setGrowSize(big) : setGrowSize(small);
 	}, [openState]);
 
-	const growStyle = { width: growSize.width, height: growSize.height, transition: 'all 1s cubic-bezier(.83,.05,.31,.96)' };
+	const growStyle = { width: `${growSize.width}px`, height: `${growSize.height}px`, transition: 'all 1s cubic-bezier(.83,.05,.31,.96)' };
 
 	return (
 		<>
@@ -30,19 +30,11 @@ export const ContentBox = (props: ContentBoxProps) => {
 				<div className={'content-border-flicker'} />
 			</div>
 
-			<div
-				className={'content-container'}
-				style={growStyle}
-				onAnimationEnd={() => {
-					console.log('animation ended...');
-				}}>
+			<div className={'content-container'} style={growStyle}>
 				<div className={'content-header'}>
 					<div className={'header-title'}>
-						<FaBeer />
-						PORTFOLIO
-						{/* <p className={'animate'}>P</p>
-						<p className={'offset'}>O</p>
-						<p className={'animate'}>RTFOLIO</p> */}
+						<FaCaretRight />
+						{'RIBER.TECH'}
 					</div>
 					<div>
 						<button
@@ -50,7 +42,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 								// navigate('/work');
 								setOpenState((prev) => !prev);
 							}}>
-							WoRk
+							Work
 						</button>
 						<FaBriefcase />
 						<Link to={'work'}>{'Work'}</Link>

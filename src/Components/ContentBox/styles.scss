@@ -101,7 +101,7 @@ $container-width: 600px;
 		// margin: 10px;
 		margin-bottom: 15px;
 		// overflow: scroll;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 }
 
@@ -153,7 +153,13 @@ $container-width: 600px;
 
 	// color: #ff00e6;
 	// font-family: 'Raleway', sans-serif;
+	font-family: 'Roboto Condensed', sans-serif;
+
 	letter-spacing: 10px;
+	// font-weight: 800;
+	font-weight: 1000;
+	// font-size: larger;
+	// font-weight: bold;
 
 	// color: white;
 	font-size: 30px;
