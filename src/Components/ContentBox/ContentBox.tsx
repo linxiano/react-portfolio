@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaBriefcase, FaCaretRight } from 'react-icons/fa';
+import { AiFillHome } from 'react-icons/ai';
+import { Loading } from '../Loading/Loading';
 
 import './styles.scss';
 
@@ -12,15 +14,24 @@ type ContentBoxProps = {
 export const ContentBox = (props: ContentBoxProps) => {
 	const navigate = useNavigate();
 
-	const small = { width: 600, height: 400 };
+	const small = { width: 610, height: 420 };
 	const big = { width: small.width * 1.5, height: small.height * 1.5 };
 
 	const [openState, setOpenState] = useState<boolean | undefined>(false);
 	const [growSize, setGrowSize] = useState(small);
 
+	const [loading, setLoading] = useState(false);
+
 	useEffect(() => {
 		openState ? setGrowSize(big) : setGrowSize(small);
 	}, [openState]);
+
+	const renderLoading = () => {
+		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+		}, 1000);
+	};
 
 	const growStyle = { width: `${growSize.width}px`, height: `${growSize.height}px`, transition: 'all 1s cubic-bezier(.83,.05,.31,.96)' };
 
@@ -37,18 +48,26 @@ export const ContentBox = (props: ContentBoxProps) => {
 						{'RIBER.TECH'}
 					</div>
 					<div>
-						<button
+						<Link
+							to={'/'}
 							onClick={() => {
-								// navigate('/work');
-								setOpenState((prev) => !prev);
+								renderLoading();
+								setOpenState(false);
 							}}>
-							Work
-						</button>
-						<FaBriefcase />
-						<Link to={'work'}>{'Work'}</Link>
+							<AiFillHome size={30} />
+						</Link>
+						<Link
+							to={'work'}
+							onClick={() => {
+								renderLoading();
+								setOpenState(true);
+							}}>
+							<FaBriefcase size={30} />
+						</Link>
 					</div>
 				</div>
-				<div className={'content-container-inner'}>{props.children}</div>
+
+				<div className={'content-container-inner'}>{loading ? <Loading /> : props.children}</div>
 			</div>
 		</>
 	);

@@ -1,6 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SocialBar } from '../../Components/SocialBar/SocialBar';
+import { FaGamepad, FaWindowMaximize, FaCodeBranch, FaChild } from 'react-icons/fa';
+import { GrGamepad } from 'react-icons/gr';
+import { MdFamilyRestroom, MdWeb } from 'react-icons/md';
+
 import ProfileImage from './profile-pic.png';
 
 import './styles.scss';
@@ -14,25 +17,38 @@ export const MainLayout = () => {
 					<img src={ProfileImage} className={'profile-img'} />
 				</div>
 				<div className={'profile-content'}>
-					Welcome to my portfolio.
-					<br />
-					<br />
-					My name is Steffen Riber Thomsen
-					<br />
-					<br />
-					Gamer by Choice
-					<br />
-					Lead Software Engineer by Instinct
-					<br />
-					Family Man by Luck
-					<br />
-					Wannabe Web Developer by Chance
-					<br />
-					<br />
+					<div className={'profile-text'}>
+						Hello and welcome to my site.
+						<br />
+						My name is Steffen Riber Thomsen.
+						<br />I work with computers
+					</div>
+					<div>
+						<ul className={'profile-items'}>
+							<li>
+								<FaGamepad />
+								<GrGamepad />
+								Gamer by Choice
+							</li>
+							<li>
+								<FaCodeBranch />
+								Lead Software Engineer by Instinct
+							</li>
+							<li>
+								<FaChild />
+								<MdFamilyRestroom />
+								Family Man by Luck
+							</li>
+							<li>
+								<FaWindowMaximize />
+								<MdWeb />
+								Wannabe Web Developer by Chance
+							</li>
+						</ul>
+					</div>
 					Skill tags: (Java) (TypeScript) (React) (React Native) (SQL/NoSQL)
 					<br />
-					Photo by <a href='https://unsplash.com/@lyovon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Levon Vardanyan</a> on{' '}
-					<a href='https://unsplash.com/s/photos/cyberpunk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Unsplash</a>
+					{/* todo - riber<!-- --> */}
 				</div>
 			</div>
 

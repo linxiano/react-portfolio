@@ -16,6 +16,10 @@
 
 - https://codepen.io/ainalem/pen/QWGNzYm
 
+## Hover Info Box
+
+- https://codepen.io/guuslieben/pen/gabQWM
+
 ## Background Image
 
 Photo by <a href='https://unsplash.com/@lyovon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Levon Vardanyan</a> on

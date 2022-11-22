@@ -2,6 +2,7 @@
 // @import url('https://fonts.googleapis.com/css?family=Audiowide');
 // @import url('https://fonts.cdnfonts.com/css/share-tech');
 @import url('https://fonts.cdnfonts.com/css/roboto-condensed');
+@import url('https://fonts.cdnfonts.com/css/roboto-slab');
 
 $light: 300;
 $normal: 400;
@@ -20,7 +21,8 @@ body {
 	// font-family: 'Audiowide', sans-serif;
 	// font-family: 'Share Tech', sans-serif;
 	font-family: 'Roboto Condensed Light', sans-serif;
-
+	// font-weight: $normal;
+	font-size: 1.2em;
 	color: $white;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
