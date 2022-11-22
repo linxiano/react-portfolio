@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaBriefcase, FaCaretRight } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
 import { Loading } from '../Loading/Loading';
+import variables from '../../variables.module.scss';
 
 import './styles.scss';
 
@@ -14,13 +15,19 @@ type ContentBoxProps = {
 export const ContentBox = (props: ContentBoxProps) => {
 	const navigate = useNavigate();
 
-	const small = { width: 610, height: 420 };
-	const big = { width: small.width * 1.5, height: small.height * 1.5 };
+	const small = { width: variables.containerWidth, height: variables.containerHeight };
+	const big = { width: variables.containerWidthGrow, height: variables.containerHeightGrow };
 
 	const [openState, setOpenState] = useState<boolean | undefined>(false);
 	const [growSize, setGrowSize] = useState(small);
 
 	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		console.log(variables);
+		console.log('small', small);
+		console.log('big', big);
+	}, []);
 
 	useEffect(() => {
 		openState ? setGrowSize(big) : setGrowSize(small);
@@ -33,7 +40,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 		}, 1000);
 	};
 
-	const growStyle = { width: `${growSize.width}px`, height: `${growSize.height}px`, transition: 'all 1s cubic-bezier(.83,.05,.31,.96)' };
+	const growStyle = { width: `${growSize.width}`, height: `${growSize.height}`, transition: 'all 1s cubic-bezier(.83,.05,.31,.96)' };
 
 	return (
 		<>

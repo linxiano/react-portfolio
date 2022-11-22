@@ -1,0 +1,27 @@
+$light: 300;
+$normal: 400;
+$semibold: 500;
+$bold: 700;
+
+$white-color: #fff;
+$dark-color: #000;
+
+$theme-bg-color: rgba(16, 18, 27, 0.5);
+$border-color: rgba(113, 119, 144, 0.2);
+$scrollbar-bg: rgb(1, 2, 3, 0.4);
+
+$theme-purple-color: rgba(31, 0, 76, 0.86);
+$theme-red-color: rgba(255, 0, 118, 0.67);
+$theme-blue-color: rgba(16, 134, 232, 0.73);
+
+$container-width: 610px;
+$container-height: 420px;
+$container-width-grow: calc($container-width * 1.5);
+$container-height-grow: calc($container-height * 1.5);
+
+:export {
+	containerWidth: $container-width;
+	containerHeight: $container-height;
+	containerWidthGrow: $container-width-grow;
+	containerHeightGrow: $container-height-grow;
+}
