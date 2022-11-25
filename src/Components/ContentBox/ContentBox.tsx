@@ -15,19 +15,13 @@ type ContentBoxProps = {
 export const ContentBox = (props: ContentBoxProps) => {
 	const navigate = useNavigate();
 
+	const timeDelay = 2000; // ms
 	const small = { width: variables.containerWidth, height: variables.containerHeight };
 	const big = { width: variables.containerWidthGrow, height: variables.containerHeightGrow };
 
 	const [openState, setOpenState] = useState<boolean | undefined>(false);
 	const [growSize, setGrowSize] = useState(small);
-
 	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		console.log('containerWidth:', variables);
-		console.log('small', small);
-		console.log('big', big);
-	}, []);
 
 	useEffect(() => {
 		openState ? setGrowSize(big) : setGrowSize(small);
@@ -37,10 +31,10 @@ export const ContentBox = (props: ContentBoxProps) => {
 		setLoading(true);
 		setTimeout(() => {
 			setLoading(false);
-		}, 1000);
+		}, timeDelay);
 	};
 
-	const growStyle = { width: `${growSize.width}`, height: `${growSize.height}`, transition: 'all 1s cubic-bezier(.83,.05,.31,.96)' };
+	const growStyle = { width: `${growSize.width}`, height: `${growSize.height}`, transition: `all ${timeDelay}ms cubic-bezier(.83,.05,.31,.96)` };
 
 	return (
 		<>

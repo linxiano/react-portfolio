@@ -6,7 +6,7 @@ import './styles.scss';
 export const Loading = () => {
 	return (
 		<div className={'container'}>
-			<AiOutlineLoading className={'loaderIcon'} size={50} />
+			<AiOutlineLoading className={'loaderIcon'} />
 		</div>
 	);
 };
