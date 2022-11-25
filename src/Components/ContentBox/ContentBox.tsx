@@ -24,7 +24,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		console.log(variables);
+		console.log('containerWidth:', variables);
 		console.log('small', small);
 		console.log('big', big);
 	}, []);
