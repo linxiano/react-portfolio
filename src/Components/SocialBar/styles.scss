@@ -1,6 +1,4 @@
-$hover-bg-color: rgba(16, 134, 232, 0.73);
-// $hover-bg-color: rgba(0, 0, 0, 0.3);
-$text-color: #fff;
+@import '../../variables.module.scss';
 
 .profile-social {
 	display: flex;
@@ -15,13 +13,9 @@ $text-color: #fff;
 		align-items: center;
 		justify-content: space-around;
 		width: 340px;
-		// padding: 2px;
 		padding-top: 5px;
 		padding-bottom: 5px;
-
-		background-color: rgba(0, 0, 0, 0.5);
-
-		// justify-items: center;
+		background-color: $theme-dark-color;
 		border-radius: 6px;
 	}
 
@@ -35,10 +29,9 @@ $text-color: #fff;
 		color: rgba(255, 0, 118, 0.34);
 
 		&:hover {
-			scale: 1.1;
+			scale: 1.2;
 		}
 		&:active {
-			// color: rgba(255, 0, 118, 0.84);
 			color: #fff;
 		}
 	}
@@ -68,10 +61,9 @@ $text-color: #fff;
 	font-weight: 700;
 	line-height: 1.5em;
 	padding: 0.5em 0.8em;
-	// background: rgba(0, 0, 0, 0.3);
-	background: $hover-bg-color;
+	background: $theme-blue-color;
 
-	color: $text-color;
+	color: $white;
 	pointer-events: none; /* This prevents the box from apearing when hovered. */
 	transition: opacity 250ms, top 250ms;
 
@@ -87,7 +79,7 @@ $text-color: #fff;
 	width: 0;
 	height: 0;
 	border: solid transparent 5px;
-	border-bottom-color: $hover-bg-color;
+	border-bottom-color: $theme-blue-color;
 
 	transition: opacity 250ms, top 250ms;
 }

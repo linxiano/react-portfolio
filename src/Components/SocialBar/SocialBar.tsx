@@ -24,9 +24,9 @@ export const SocialBar = () => {
 				{externalItem(<FaTwitter size={30} className={'social-icon'} />, 'https://twitter.com/linxiano', 'twitter.com/linxiano')}
 				{externalItem(<FaDiscord size={30} className={'social-icon'} />, 'http://discordapp.com/users/linx#3036', 'discordapp.com/users/linx#3036')}
 
-				{/* <div className={'dfn'} data-info={'riber4 (at) gmail (dot) com'}>
+				<div className={'dfn'} data-info={'riber4 (at) gmail (dot) com'}>
 					<FaEnvelope size={30} className={'social-icon'} />
-				</div> */}
+				</div>
 			</div>
 		</div>
 	);

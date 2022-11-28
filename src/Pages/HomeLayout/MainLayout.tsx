@@ -1,14 +1,14 @@
 import React from 'react';
 import { SocialBar } from '../../Components/SocialBar/SocialBar';
 import { FaGamepad, FaWindowMaximize, FaCodeBranch, FaChild } from 'react-icons/fa';
-import { GrGamepad } from 'react-icons/gr';
-import { MdFamilyRestroom, MdWeb } from 'react-icons/md';
-
 import ProfileImage from './profile-pic.png';
 
 import './styles.scss';
+import { Tag } from '../../Components/Tag/Tag';
 
 export const MainLayout = () => {
+	const skills = ['Java', 'Linux', 'Azure', 'TypeScript', 'React', 'React-Native', 'SQL/NoSQL', 'DevOps', 'SCRUM', 'Software Architecture', 'OOP'];
+
 	return (
 		<div>
 			<div className={'top-container'}>
@@ -18,37 +18,46 @@ export const MainLayout = () => {
 				</div>
 				<div className={'profile-content'}>
 					<div className={'profile-text'}>
-						Hello and welcome to my site.
-						<br />
+						{/* Hello and welcome to my site.
+						<br /> */}
 						My name is Steffen Riber Thomsen.
 						<br />I work with computers
 					</div>
 					<div>
 						<ul className={'profile-items'}>
 							<li>
-								<FaGamepad />
-								<GrGamepad />
-								Gamer by Choice
+								<span>
+									<FaGamepad />
+									Gamer by Choice
+								</span>
 							</li>
 							<li>
-								<FaCodeBranch />
-								Lead Software Engineer by Instinct
+								<span>
+									<FaCodeBranch />
+									Lead Software Engineer by Instinct
+								</span>
 							</li>
 							<li>
-								<FaChild />
-								<MdFamilyRestroom />
-								Family Man by Luck
+								<span>
+									<FaChild />
+									Family Man by Luck
+								</span>
 							</li>
 							<li>
-								<FaWindowMaximize />
-								<MdWeb />
-								Wannabe Web Developer by Chance
+								<span>
+									<FaWindowMaximize />
+									Wannabe Web Developer by Chance
+								</span>
 							</li>
 						</ul>
 					</div>
-					Skill tags: (Java) (TypeScript) (React) (React Native) (SQL/NoSQL)
-					<br />
-					{/* todo - riber<!-- --> */}
+					<div className={'container-tags'}>
+						{/* <ul> */}
+						{skills.map((item, index) => {
+							return <Tag key={index} name={item} />;
+						})}
+						{/* </ul> */}
+					</div>
 				</div>
 			</div>
 

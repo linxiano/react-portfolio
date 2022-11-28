@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.scss';
 import { InteractiveBackground } from './Components/InteractiveBackground/InteractiveBackground';
 import { ContentBox } from './Components/ContentBox/ContentBox';

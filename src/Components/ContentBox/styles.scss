@@ -26,25 +26,6 @@ $blur: 78px;
 	padding-left: 20px;
 }
 
-// @keyframes growBox {
-// 	from {
-// 		height: $container-height;
-// 		width: $container-width;
-// 	}
-// 	to {
-// 		height: calc($container-height * 1.3);
-// 		width: calc($container-width * 1.3);
-// 	}
-// }
-
-// .content-grow {
-// 	animation: growBox 3s ease;
-// }
-
-// .content-shrink {
-// 	animation: growBox 3s backwards ease;
-// }
-
 .content-border {
 	position: absolute;
 	height: $container-height;
@@ -57,7 +38,6 @@ $blur: 78px;
 	border-radius: 20px;
 	.content-border-flicker {
 		animation: border-flicker 2s linear infinite;
-		// background-color: #ff0;
 		height: 100%;
 		width: 100%;
 		border-radius: 20px;
