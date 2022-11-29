@@ -7,7 +7,22 @@ import './styles.scss';
 import { Tag } from '../../Components/Tag/Tag';
 
 export const MainLayout = () => {
-	const skills = ['Java', 'Linux', 'Azure', 'TypeScript', 'React', 'React-Native', 'SQL/NoSQL', 'DevOps', 'SCRUM', 'Software Architecture', 'OOP'];
+	const skills = [
+		'Java',
+		'Linux',
+		'OOP',
+		'TypeScript',
+		'React',
+		'React-Native',
+		'SQL/NoSQL',
+		'Azure',
+		'DevOps',
+		'SCRUM',
+		'Software Architecture',
+		'Cloud Computing',
+		'Serverless',
+		'Event Driven Design',
+	];
 
 	return (
 		<div>
@@ -52,11 +67,9 @@ export const MainLayout = () => {
 						</ul>
 					</div>
 					<div className={'container-tags'}>
-						{/* <ul> */}
 						{skills.map((item, index) => {
 							return <Tag key={index} name={item} />;
 						})}
-						{/* </ul> */}
 					</div>
 				</div>
 			</div>
