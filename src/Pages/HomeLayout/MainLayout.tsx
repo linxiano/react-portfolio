@@ -90,8 +90,9 @@ export const MainLayout = () => {
 				</div>
 				<div className={'profile-content'}>
 					<div className={'profile-text'}>
-						My name is Steffen Riber Thomsen.
-						<br />I work with computers
+						{"Hi. I'm Steffen."}
+						<br />
+						{'I work with computers!'}
 					</div>
 					<CenterPhases />
 					{/* <ProfileItems /> */}

@@ -26,24 +26,46 @@ $blur: 78px;
 	padding-left: 20px;
 }
 
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 .header-links {
 	display: flex;
 	justify-content: flex-end;
 
-	a {
+	.clickable-link {
 		color: $theme-less-red-color;
-		// opacity: 0.5;
 		padding-right: 20px;
 
-		& > svg:hover {
-			// color: $theme-less-red-color;
+		> svg:hover {
 			scale: 1.2;
 		}
-
-		& :active {
+		:active {
 			color: $white;
 		}
 	}
+
+	// a {
+	// 	color: $theme-less-red-color;
+	// 	// opacity: 0.5;
+	// 	padding-right: 20px;
+	// 	// transition: all 1s ease;
+
+	// 	& > svg:hover {
+	// 		// color: $theme-less-red-color;
+	// 		scale: 1.2;
+	// 	}
+
+	// 	& :active {
+	// 		color: $white;
+	// 	}
+	// }
 }
 
 .content-border {

@@ -34,6 +34,36 @@ export const ContentBox = (props: ContentBoxProps) => {
 		}, timeDelay);
 	};
 
+	const AnimatedLink = () => (
+		<>
+			{location.pathname !== '/' ? (
+				<Link
+					className={'clickable-link'}
+					to={'/'}
+					onClick={() => {
+						if (location.pathname !== '/') {
+							renderLoading();
+							setOpenState(false);
+						}
+					}}>
+					<AiFillHome size={30} />
+				</Link>
+			) : (
+				<Link
+					className={'clickable-link'}
+					to={'work'}
+					onClick={() => {
+						if (location.pathname !== '/work') {
+							renderLoading();
+							setOpenState(true);
+						}
+					}}>
+					<FaBriefcase size={30} />
+				</Link>
+			)}
+		</>
+	);
+
 	const growStyle = { width: `${growSize.width}`, height: `${growSize.height}`, transition: `all ${timeDelay}ms cubic-bezier(.83,.05,.31,.96)` };
 
 	return (
@@ -49,7 +79,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 						{'RIBER.TECH'}
 					</div>
 					<div className={'header-links'}>
-						<Link
+						{/* <Link
 							to={'/'}
 							onClick={() => {
 								if (location.pathname !== '/') {
@@ -68,7 +98,8 @@ export const ContentBox = (props: ContentBoxProps) => {
 								}
 							}}>
 							<FaBriefcase size={30} />
-						</Link>
+						</Link> */}
+						<AnimatedLink />
 					</div>
 				</div>
 
