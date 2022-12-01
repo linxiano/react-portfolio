@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaBriefcase, FaCaretRight } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
 import { Loading } from '../Loading/Loading';
@@ -13,7 +13,7 @@ type ContentBoxProps = {
 };
 
 export const ContentBox = (props: ContentBoxProps) => {
-	const navigate = useNavigate();
+	const location = useLocation();
 
 	const timeDelay = 2000; // ms
 	const small = { width: variables.containerWidth, height: variables.containerHeight };
@@ -48,20 +48,24 @@ export const ContentBox = (props: ContentBoxProps) => {
 						<FaCaretRight />
 						{'RIBER.TECH'}
 					</div>
-					<div>
+					<div className={'header-links'}>
 						<Link
 							to={'/'}
 							onClick={() => {
-								renderLoading();
-								setOpenState(false);
+								if (location.pathname !== '/') {
+									renderLoading();
+									setOpenState(false);
+								}
 							}}>
 							<AiFillHome size={30} />
 						</Link>
 						<Link
 							to={'work'}
 							onClick={() => {
-								renderLoading();
-								setOpenState(true);
+								if (location.pathname !== '/work') {
+									renderLoading();
+									setOpenState(true);
+								}
 							}}>
 							<FaBriefcase size={30} />
 						</Link>

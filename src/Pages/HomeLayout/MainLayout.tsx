@@ -22,7 +22,62 @@ export const MainLayout = () => {
 		'Cloud Computing',
 		'Serverless',
 		'Event Driven Design',
+		'TCP/IP',
 	];
+
+	const CenterPhases = () => (
+		<div className={'center-items'}>
+			<div className={'center-items-inner'}>
+				<span>
+					<FaCodeBranch />
+					Lead Software Engineer by Instinct
+				</span>
+				<span>
+					<FaGamepad />
+					Gamer by Choice
+				</span>
+				<span>
+					<FaChild />
+					Family Man by Luck
+				</span>
+				<span>
+					<FaWindowMaximize />
+					Wannabe Web Developer by Chance
+				</span>
+			</div>
+		</div>
+	);
+
+	const ProfileItems = () => (
+		<div>
+			<ul className={'profile-items'}>
+				<li>
+					<span>
+						<FaCodeBranch />
+						Lead Software Engineer by Instinct
+					</span>
+				</li>
+				<li>
+					<span>
+						<FaGamepad />
+						Gamer by Choice
+					</span>
+				</li>
+				<li>
+					<span>
+						<FaChild />
+						Family Man by Luck
+					</span>
+				</li>
+				<li>
+					<span>
+						<FaWindowMaximize />
+						Wannabe Web Developer by Chance
+					</span>
+				</li>
+			</ul>
+		</div>
+	);
 
 	return (
 		<div>
@@ -33,39 +88,11 @@ export const MainLayout = () => {
 				</div>
 				<div className={'profile-content'}>
 					<div className={'profile-text'}>
-						{/* Hello and welcome to my site.
-						<br /> */}
 						My name is Steffen Riber Thomsen.
 						<br />I work with computers
 					</div>
-					<div>
-						<ul className={'profile-items'}>
-							<li>
-								<span>
-									<FaGamepad />
-									Gamer by Choice
-								</span>
-							</li>
-							<li>
-								<span>
-									<FaCodeBranch />
-									Lead Software Engineer by Instinct
-								</span>
-							</li>
-							<li>
-								<span>
-									<FaChild />
-									Family Man by Luck
-								</span>
-							</li>
-							<li>
-								<span>
-									<FaWindowMaximize />
-									Wannabe Web Developer by Chance
-								</span>
-							</li>
-						</ul>
-					</div>
+					<CenterPhases />
+					{/* <ProfileItems /> */}
 					<div className={'container-tags'}>
 						{skills.map((item, index) => {
 							return <Tag key={index} name={item} />;

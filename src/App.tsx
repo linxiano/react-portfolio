@@ -18,10 +18,18 @@ export const App = () => {
 							<Route path='/work' element={<WorkLayout />} />
 						</Routes>
 					</ContentBox>
-					{/* TODO image ref... */}
-					<div style={{ position: 'absolute', bottom: '0', right: '0' }}>
-						Photo by <a href='https://unsplash.com/@lyovon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Levon Vardanyan</a> on{' '}
-						<a href='https://unsplash.com/s/photos/cyberpunk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>Unsplash</a>
+					<div className={'image-ref'}>
+						{'Photo by '}
+						<a href='https://unsplash.com/@lyovon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText' target='_blank' rel='noopener noreferrer'>
+							{'Levon Vardanyan'}
+						</a>
+						{' on '}
+						<a
+							href='https://unsplash.com/s/photos/cyberpunk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+							target='_blank'
+							rel='noopener noreferrer'>
+							{'Unsplash'}
+						</a>
 					</div>
 				</MemoryRouter>
 			</div>

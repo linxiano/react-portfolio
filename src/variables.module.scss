@@ -3,7 +3,7 @@ $normal: 400;
 $semibold: 500;
 $bold: 700;
 
-$white: #fff;
+$white: #edf2f4;
 $dark: #000;
 
 $theme-bg-color: rgba(16, 18, 27, 0.5);
@@ -18,8 +18,10 @@ $theme-dark-color: rgba(0, 0, 0, 0.5);
 
 $container-width: 610px;
 $container-height: 420px;
-$container-width-grow: calc($container-width * 1.5);
-$container-height-grow: calc($container-height * 1.5);
+// $container-width-grow: calc($container-width * 1.5);
+$container-width-grow: 80vw;
+// $container-height-grow: calc($container-height * 1.5);
+$container-height-grow: 80vh;
 
 :export {
 	containerWidth: $container-width;
