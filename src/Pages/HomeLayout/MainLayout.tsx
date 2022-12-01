@@ -82,9 +82,11 @@ export const MainLayout = () => {
 	return (
 		<div>
 			<div className={'top-container'}>
-				<div className={'profile-container'}>
-					<div className={'profile-circle'} />
-					<img src={ProfileImage} className={'profile-img'} />
+				<div>
+					<div className={'profile-container'}>
+						<div className={'profile-circle'} />
+						<img src={ProfileImage} className={'profile-img'} />
+					</div>
 				</div>
 				<div className={'profile-content'}>
 					<div className={'profile-text'}>
