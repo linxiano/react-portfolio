@@ -79,26 +79,6 @@ export const ContentBox = (props: ContentBoxProps) => {
 						{'RIBER.TECH'}
 					</div>
 					<div className={'header-links'}>
-						{/* <Link
-							to={'/'}
-							onClick={() => {
-								if (location.pathname !== '/') {
-									renderLoading();
-									setOpenState(false);
-								}
-							}}>
-							<AiFillHome size={30} />
-						</Link>
-						<Link
-							to={'work'}
-							onClick={() => {
-								if (location.pathname !== '/work') {
-									renderLoading();
-									setOpenState(true);
-								}
-							}}>
-							<FaBriefcase size={30} />
-						</Link> */}
 						<AnimatedLink />
 					</div>
 				</div>

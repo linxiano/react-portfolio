@@ -1,6 +1,11 @@
 @import '../../variables.module.scss';
 
 .profile-social {
+	margin-top: 15px;
+	border-style: solid;
+	border-top: 2px;
+	border-color: $border-color;
+
 	display: flex;
 	justify-content: center;
 

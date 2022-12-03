@@ -2,9 +2,9 @@ import React from 'react';
 import { SocialBar } from '../../Components/SocialBar/SocialBar';
 import { FaGamepad, FaWindowMaximize, FaCodeBranch, FaChild } from 'react-icons/fa';
 import ProfileImage from './profile-pic.png';
+import { Tag } from '../../Components/Tag/Tag';
 
 import './styles.scss';
-import { Tag } from '../../Components/Tag/Tag';
 
 export const MainLayout = () => {
 	const skills = [
