@@ -25,7 +25,7 @@ export const MainLayout = () => {
 		'TCP/IP',
 	];
 
-	const CenterPhases = () => (
+	const ProfileItems = () => (
 		<div className={'center-items'}>
 			<div className={'center-items-inner'}>
 				<span>
@@ -48,37 +48,6 @@ export const MainLayout = () => {
 		</div>
 	);
 
-	const ProfileItems = () => (
-		<div>
-			<ul className={'profile-items'}>
-				<li>
-					<span>
-						<FaCodeBranch />
-						Lead Software Engineer by Instinct
-					</span>
-				</li>
-				<li>
-					<span>
-						<FaGamepad />
-						Gamer by Choice
-					</span>
-				</li>
-				<li>
-					<span>
-						<FaChild />
-						Family Man by Luck
-					</span>
-				</li>
-				<li>
-					<span>
-						<FaWindowMaximize />
-						Wannabe Web Developer by Chance
-					</span>
-				</li>
-			</ul>
-		</div>
-	);
-
 	return (
 		<div>
 			<div className={'top-container'}>
@@ -94,8 +63,7 @@ export const MainLayout = () => {
 						<br />
 						{'I work with computers!'}
 					</div>
-					<CenterPhases />
-					{/* <ProfileItems /> */}
+					<ProfileItems />
 					<div className={'container-tags'}>
 						{skills.map((item, index) => {
 							return <Tag key={index} name={item} />;

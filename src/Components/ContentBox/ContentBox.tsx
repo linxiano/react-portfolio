@@ -76,7 +76,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 				<div className={'content-header'}>
 					<div className={'header-title'}>
 						<FaCaretRight />
-						{'RIBER.TECH'}
+						{'RIBER.DEV'}
 					</div>
 					<div className={'header-links'}>
 						<AnimatedLink />
