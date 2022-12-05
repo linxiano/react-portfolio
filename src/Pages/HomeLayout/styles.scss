@@ -4,18 +4,29 @@
 	// background-color: #0f0;
 	display: flex;
 	justify-content: space-evenly;
+	flex-direction: row;
+	flex-wrap: wrap;
 
 	border-color: #fff;
 	border-width: 20px;
 
 	.profile-content {
-		width: 100%;
+		min-width: 300px;
+		flex: 1;
 
 		.profile-text {
 			text-align: center;
 			padding-top: 15px;
 			font-weight: 900;
 			letter-spacing: 2px;
+		}
+
+		.profile-email {
+			font-weight: 400;
+			letter-spacing: 0px;
+			font-style: italic;
+			font-size: 1rem;
+			color: rgba(255, 255, 255, 0.4);
 		}
 
 		.center-items {

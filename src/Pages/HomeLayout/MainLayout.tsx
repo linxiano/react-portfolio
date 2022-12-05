@@ -62,6 +62,8 @@ export const MainLayout = () => {
 						{"Hi. I'm Steffen."}
 						<br />
 						{'I work with computers!'}
+						<br />
+						<span className={'profile-email'}>{'riber4 (at) gmail (dot) com'}</span>
 					</div>
 					<ProfileItems />
 					<div className={'container-tags'}>

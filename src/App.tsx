@@ -5,6 +5,7 @@ import { ContentBox } from './Components/ContentBox/ContentBox';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './Pages/HomeLayout/MainLayout';
 import { WorkLayout } from './Pages/WorkLayout/WorkLayout';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 export const App = () => {
 	return (
