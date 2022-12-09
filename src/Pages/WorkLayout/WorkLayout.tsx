@@ -1,6 +1,7 @@
 import React from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
+import { isMobile } from 'react-device-detect';
 
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
@@ -25,7 +26,7 @@ export const WorkLayout = () => {
 
 	return (
 		<>
-			<div className={'work-container'}>
+			<div className={`work-container ${isMobile && 'document-mobile'}`}>
 				<Document file='./steffen_riber_thomsen_cv.pdf' options={opts}>
 					<Page pageNumber={1} className={'pdf-page'} />
 					<Page pageNumber={2} className={'pdf-page'} />

@@ -18,12 +18,21 @@ $theme-dark-color: rgba(0, 0, 0, 0.5);
 
 $container-width: 610px;
 $container-height: 465px;
+$container-width-mobile: 100vw;
+$container-height-mobile: 85vh;
+
 $container-width-grow: 75vw;
 $container-height-grow: 80vh;
+$container-width-grow-mobile: 100vw;
+$container-height-grow-mobile: 85vh;
 
 :export {
 	containerWidth: $container-width;
 	containerHeight: $container-height;
+	containerWidthMobile: $container-width-mobile;
+	containerHeightMobile: $container-height-mobile;
 	containerWidthGrow: $container-width-grow;
 	containerHeightGrow: $container-height-grow;
+	containerWidthGrowMobile: $container-width-grow-mobile;
+	containerHeightGrowMobile: $container-height-grow-mobile;
 }

@@ -4,6 +4,7 @@ import { FaBriefcase, FaCaretRight } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
 import { Loading } from '../Loading/Loading';
 import variables from '../../variables.module.scss';
+import { isMobile } from 'react-device-detect';
 
 import './styles.scss';
 
@@ -16,8 +17,14 @@ export const ContentBox = (props: ContentBoxProps) => {
 	const location = useLocation();
 
 	const timeDelay = 2000; // ms
-	const small = { width: variables.containerWidth, height: variables.containerHeight };
-	const big = { width: variables.containerWidthGrow, height: variables.containerHeightGrow };
+	const small = {
+		width: isMobile ? variables.containerWidthMobile : variables.containerWidth,
+		height: isMobile ? variables.containerHeightMobile : variables.containerHeight,
+	};
+	const big = {
+		width: isMobile ? variables.containerWidthGrowMobile : variables.containerWidthGrow,
+		height: isMobile ? variables.containerHeightGrowMobile : variables.containerHeightGrow,
+	};
 
 	const [openState, setOpenState] = useState<boolean | undefined>(false);
 	const [growSize, setGrowSize] = useState(small);

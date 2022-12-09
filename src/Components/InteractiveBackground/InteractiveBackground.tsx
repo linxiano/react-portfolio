@@ -6,17 +6,15 @@ export const InteractiveBackground = () => {
 	const elementRef = useRef<HTMLDivElement>(null);
 	const scaleFactor = 200;
 
-	// const accelerometer = new Accelerometer({ referenceFrame: "device" });
-
 	useEffect(() => {
 		// Set background in center
 		if (elementRef.current) {
 			const x = (elementRef.current?.clientWidth - window.innerWidth) / 2;
 			const y = (elementRef.current?.clientHeight - window.innerHeight) / 2;
-			console.log('window.innerWidth', window.innerWidth, 'window.innerHeight', window.innerHeight);
-			console.log('clientWidth', elementRef.current?.clientWidth, 'clientHeight', elementRef.current?.clientHeight);
+			// console.log('window.innerWidth', window.innerWidth, 'window.innerHeight', window.innerHeight);
+			// console.log('clientWidth', elementRef.current?.clientWidth, 'clientHeight', elementRef.current?.clientHeight);
 
-			console.log(`-${x}px -${y}px`);
+			// console.log(`-${x}px -${y}px`);
 			elementRef.current.style.translate = `-${x}px -${y}px`;
 		}
 	}, [elementRef]);
