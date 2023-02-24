@@ -67,8 +67,8 @@ export const MainLayout = () => {
 					</div>
 					<ProfileItems />
 					<div className={'container-tags'}>
-						{skills.map((item, index) => {
-							return <Tag key={index} name={item} />;
+						{skills.map((item) => {
+							return <Tag key={item} name={item} />;
 						})}
 					</div>
 				</div>

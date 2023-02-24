@@ -4,8 +4,9 @@ import { InteractiveBackground } from './Components/InteractiveBackground/Intera
 import { ContentBox } from './Components/ContentBox/ContentBox';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './Pages/HomeLayout/MainLayout';
-import { WorkLayout } from './Pages/WorkLayout/WorkLayout';
 import { BrowserView, MobileView } from 'react-device-detect';
+import { CVLayout } from './Pages/CVLayout/CVLayout';
+import WorkLayout from './Pages/WorkLayout/WorkLayout';
 
 export const App = () => {
 	return (
@@ -17,6 +18,7 @@ export const App = () => {
 						<Routes>
 							<Route path='/' element={<MainLayout />} />
 							<Route path='/work' element={<WorkLayout />} />
+							<Route path='/cv' element={<CVLayout />} />
 						</Routes>
 					</ContentBox>
 					<div className={'image-ref'}>
