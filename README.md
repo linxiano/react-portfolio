@@ -1,5 +1,17 @@
 # react-portfolio
 
+Built with [Vite](https://vite.dev/) + React + TypeScript.
+
+## Development
+
+```sh
+npm install      # install deps
+npm run dev      # start dev server (http://localhost:3000)
+npm run build    # typecheck + production build -> build/
+npm run preview  # preview the production build
+npm run lint     # eslint
+```
+
 # Inspiration
 
 ## Border Animation

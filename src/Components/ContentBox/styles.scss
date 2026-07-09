@@ -1,4 +1,4 @@
-@import '../../variables.module.scss';
+@use '../../variables' as *;
 
 $color: $theme-red-color;
 $spread: 10px;

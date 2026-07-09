@@ -5,11 +5,16 @@
 /.pnp
 .pnp.js
 
-# testing
-/coverage
-
 # production
 /build
+/dist
+
+# vite
+node_modules/.vite
+*.local
+
+# typescript
+*.tsbuildinfo
 
 # misc
 .DS_Store

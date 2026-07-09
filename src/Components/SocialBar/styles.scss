@@ -1,4 +1,4 @@
-@import '../../variables.module.scss';
+@use '../../variables' as *;
 
 .profile-social {
 	margin-top: 5px;
