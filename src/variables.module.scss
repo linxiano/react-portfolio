@@ -1,31 +1,8 @@
-$light: 300;
-$normal: 400;
-$semibold: 500;
-$bold: 700;
+@use './variables' as *;
 
-$white: #edf2f4;
-$dark: #000;
-
-$theme-bg-color: rgba(16, 18, 27, 0.5);
-$border-color: rgba(113, 119, 144, 0.2);
-$scrollbar-bg: rgb(1, 2, 3, 0.4);
-
-$theme-purple-color: rgba(31, 0, 76, 0.86);
-$theme-red-color: rgba(255, 0, 118, 0.67);
-$theme-less-red-color: rgba(255, 0, 118, 0.34);
-$theme-blue-color: rgba(16, 134, 232, 0.73);
-$theme-dark-color: rgba(0, 0, 0, 0.5);
-
-$container-width: 610px;
-$container-height: 465px;
-$container-width-mobile: 100vw;
-$container-height-mobile: 85vh;
-
-$container-width-grow: 75vw;
-$container-height-grow: 80vh;
-$container-width-grow-mobile: 100vw;
-$container-height-grow-mobile: 85vh;
-
+// CSS-module export: exposes SCSS values to TS/JS (imported in ContentBox.tsx).
+// Kept separate from _variables.scss so plain stylesheets can @import the
+// variables without pulling this :export block into their CSS output.
 :export {
 	containerWidth: $container-width;
 	containerHeight: $container-height;

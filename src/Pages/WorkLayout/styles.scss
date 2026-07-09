@@ -1,4 +1,4 @@
-@import '../../variables.module.scss';
+@use '../../variables' as *;
 
 .work-item-container {
 	// background-color: aqua;
