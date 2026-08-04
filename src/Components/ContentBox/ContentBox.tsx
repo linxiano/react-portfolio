@@ -3,10 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaBriefcase, FaCaretRight } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
 import { Loading } from '../Loading/Loading';
-import variables from '../../variables.module.scss';
+import { containerSizes as variables } from '../../containerSizes';
 import { isMobile } from 'react-device-detect';
-
-import './styles.scss';
 
 type ContentBoxProps = {
 	header?: React.ReactNode;
@@ -45,7 +43,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 		<>
 			{location.pathname !== '/' ? (
 				<Link
-					className={'clickable-link'}
+					className={'pr-5 text-accent-soft active:text-ink [&>svg:hover]:scale-[1.2]'}
 					to={'/'}
 					onClick={() => {
 						if (location.pathname !== '/') {
@@ -57,7 +55,7 @@ export const ContentBox = (props: ContentBoxProps) => {
 				</Link>
 			) : (
 				<Link
-					className={'clickable-link'}
+					className={'pr-5 text-accent-soft active:text-ink [&>svg:hover]:scale-[1.2]'}
 					to={'work'}
 					onClick={() => {
 						if (location.pathname !== '/work') {
@@ -75,22 +73,22 @@ export const ContentBox = (props: ContentBoxProps) => {
 
 	return (
 		<>
-			<div className={`content-border`} style={growStyle}>
-				<div className={'content-border-flicker'} />
+			<div className={'absolute -z-10 flex items-center justify-center'} style={growStyle}>
+				<div className={'mx-5 h-full w-full animate-border-flicker rounded-[20px]'} />
 			</div>
 
-			<div className={'content-container'} style={growStyle}>
-				<div className={'content-header'}>
-					<div className={'header-title'}>
+			<div className={'mx-5 flex flex-col rounded-[20px] bg-panel backdrop-blur-[10px]'} style={growStyle}>
+				<div className={'flex h-[65px] items-center justify-between border-b border-hairline'}>
+					<div className={'flex h-full items-center pl-5 font-slab text-[2rem] font-black tracking-[10px] text-accent'}>
 						<FaCaretRight />
 						{'RIBER.DEV'}
 					</div>
-					<div className={'header-links'}>
+					<div className={'flex justify-end'}>
 						<AnimatedLink />
 					</div>
 				</div>
 
-				<div className={'content-container-inner'}>{loading ? <Loading /> : props.children}</div>
+				<div className={'mb-[15px] flex-1 overflow-y-auto'}>{loading ? <Loading /> : props.children}</div>
 			</div>
 		</>
 	);

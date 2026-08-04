@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { isBrowser } from 'react-device-detect';
-import './styles.scss';
+import bg from './bg.jpg';
 
 export const InteractiveBackground = () => {
 	const elementRef = useRef<HTMLDivElement>(null);
@@ -48,5 +48,11 @@ export const InteractiveBackground = () => {
 		};
 	}, []);
 
-	return <div ref={elementRef} className={'bg-container'} />;
+	return (
+		<div
+			ref={elementRef}
+			className={'absolute -z-10 h-[130vmax] w-[130vmax] bg-cover bg-center bg-no-repeat'}
+			style={{ backgroundImage: `url(${bg})` }}
+		/>
+	);
 };

@@ -1,18 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [react()],
-	css: {
-		preprocessorOptions: {
-			scss: {
-				// The @import rule still works but is deprecated in Dart Sass;
-				// silence the warning until the stylesheets migrate to @use.
-				silenceDeprecations: ['import'],
-			},
-		},
-	},
+	plugins: [react(), tailwindcss()],
 	server: {
 		port: 3000,
 		open: true,
