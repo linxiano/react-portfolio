@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.scss';
 import { InteractiveBackground } from './Components/InteractiveBackground/InteractiveBackground';
 import { ContentBox } from './Components/ContentBox/ContentBox';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
@@ -12,7 +11,7 @@ export const App = () => {
 	return (
 		<>
 			<InteractiveBackground />
-			<div className={'center-container'}>
+			<div className={'flex min-h-screen items-center justify-center'}>
 				<MemoryRouter>
 					<ContentBox>
 						<Routes>
@@ -21,13 +20,18 @@ export const App = () => {
 							<Route path='/cv' element={<CVLayout />} />
 						</Routes>
 					</ContentBox>
-					<div className={'image-ref'}>
+					<div className={'absolute bottom-0 right-0 m-0.5 rounded-lg bg-panel px-2 py-1 text-white/30'}>
 						{'Photo by '}
-						<a href='https://unsplash.com/@lyovon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText' target='_blank' rel='noopener noreferrer'>
+						<a
+							className='text-white/30 hover:text-black'
+							href='https://unsplash.com/@lyovon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+							target='_blank'
+							rel='noopener noreferrer'>
 							{'Levon Vardanyan'}
 						</a>
 						{' on '}
 						<a
+							className='text-white/30 hover:text-black'
 							href='https://unsplash.com/s/photos/cyberpunk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
 							target='_blank'
 							rel='noopener noreferrer'>

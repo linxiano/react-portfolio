@@ -4,8 +4,6 @@ import { FaGamepad, FaWindowMaximize, FaCodeBranch, FaChild } from 'react-icons/
 import ProfileImage from './profile-pic.png';
 import { Tag } from '../../Components/Tag/Tag';
 
-import './styles.scss';
-
 export const MainLayout = () => {
 	const skills = [
 		'Java',
@@ -26,8 +24,11 @@ export const MainLayout = () => {
 	];
 
 	const ProfileItems = () => (
-		<div className={'center-items'}>
-			<div className={'center-items-inner'}>
+		<div className={'flex flex-col items-center'}>
+			<div
+				className={
+					'mt-[15px] rounded-md border-2 border-accent-soft px-[10px] py-0.5 [&>span]:flex [&>span]:items-center [&>span>svg]:h-5 [&>span>svg]:w-5 [&>span>svg]:pr-[10px]'
+				}>
 				<span>
 					<FaCodeBranch />
 					Lead Software Engineer by Instinct
@@ -50,23 +51,28 @@ export const MainLayout = () => {
 
 	return (
 		<div>
-			<div className={'top-container'}>
+			<div className={'flex flex-row flex-wrap justify-evenly'}>
 				<div>
-					<div className={'profile-container'}>
-						<div className={'profile-circle'} />
-						<img src={ProfileImage} className={'profile-img'} />
+					<div className={'grid pl-5 pt-5'}>
+						<div className={'col-start-1 row-start-1 h-[150px] w-[150px] self-end rounded-full border-2 border-accent-soft bg-shade'} />
+						<img
+							src={ProfileImage}
+							className={
+								'col-start-1 row-start-1 h-auto w-[150px] origin-bottom self-end rounded-[43%] pb-0.5 transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-110'
+							}
+						/>
 					</div>
 				</div>
-				<div className={'profile-content'}>
-					<div className={'profile-text'}>
+				<div className={'min-w-[300px] flex-1'}>
+					<div className={'pt-[15px] text-center font-black tracking-[2px]'}>
 						{"Hi. I'm Steffen."}
 						<br />
 						{'I work with computers!'}
 						<br />
-						<span className={'profile-email'}>{'riber4 (at) gmail (dot) com'}</span>
+						<span className={'text-[1rem] font-normal italic tracking-normal text-white/40'}>{'riber4 (at) gmail (dot) com'}</span>
 					</div>
 					<ProfileItems />
-					<div className={'container-tags'}>
+					<div className={'flex flex-row flex-wrap items-center justify-center px-5 pt-[15px]'}>
 						{skills.map((item) => {
 							return <Tag key={item} name={item} />;
 						})}

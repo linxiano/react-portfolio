@@ -1,0 +1,100 @@
+@import url('https://fonts.cdnfonts.com/css/roboto-condensed');
+@import url('https://fonts.cdnfonts.com/css/roboto-slab-2');
+@import 'tailwindcss';
+
+@theme {
+	--color-ink: #edf2f4;
+	--color-panel: rgba(16, 18, 27, 0.5);
+	--color-hairline: rgba(113, 119, 144, 0.2);
+	--color-scrollbar: rgba(1, 2, 3, 0.4);
+	--color-accent: rgba(255, 0, 118, 0.67);
+	--color-accent-soft: rgba(255, 0, 118, 0.34);
+	--color-shade: rgba(0, 0, 0, 0.5);
+
+	--font-slab: 'Roboto Slab', sans-serif;
+
+	--animate-border-flicker: border-flicker 2s linear infinite;
+
+	@keyframes border-flicker {
+		0% {
+			opacity: 0.1;
+			box-shadow: 0 0 78px 10px var(--color-accent);
+		}
+		2% {
+			opacity: 1;
+			box-shadow: 0 0 78px 10px var(--color-accent);
+		}
+		4% {
+			opacity: 0.1;
+			box-shadow: 0 0 78px 10px var(--color-accent);
+		}
+		8% {
+			opacity: 1;
+			box-shadow: 0 0 78px 10px var(--color-accent);
+		}
+		70% {
+			opacity: 0.7;
+			box-shadow: 0 0 78px 10px var(--color-accent);
+		}
+		100% {
+			opacity: 1;
+			box-shadow: 0 0 78px 10px var(--color-accent);
+		}
+	}
+}
+
+@layer base {
+	html,
+	body {
+		overflow: hidden;
+	}
+
+	body {
+		margin: 0;
+		height: -webkit-fill-available;
+		min-height: 100vh;
+		position: relative;
+		font-family: 'Roboto Condensed Light', sans-serif;
+		font-size: 1.2em;
+		/* Preflight sets 1.5 on html; pre-Tailwind styling relied on `normal`,
+		   and the ContentBox is sized to fit content at that leading. */
+		line-height: normal;
+		color: var(--color-ink);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 6px;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-scrollbar);
+	border-radius: 10px;
+}
+
+/* react-pdf overrides (target library-generated DOM) */
+.react-pdf__Document {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.pdf-page {
+	border-color: #000;
+	margin: 20px;
+	box-shadow: 10px 10px 14px -1px rgba(0, 0, 0, 0.75);
+}
+
+.react-pdf__Page__canvas {
+	height: auto !important;
+}
+
+.document-mobile .react-pdf__Page__canvas {
+	width: 100% !important;
+	height: auto !important;
+}
