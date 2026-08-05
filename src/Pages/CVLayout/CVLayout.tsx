@@ -6,6 +6,7 @@ import { isMobile } from 'react-device-detect';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import { Link } from 'react-router-dom';
+import { cvFile } from '../../designs/content';
 
 export const CVLayout = () => {
 	const opts = {
@@ -13,12 +14,12 @@ export const CVLayout = () => {
 	};
 
 	const downloadPDF = () => {
-		fetch('steffen_riber_thomsen_cv.pdf').then((response) => {
+		fetch(`/${cvFile}`).then((response) => {
 			response.blob().then((blob) => {
 				const fileURL = window.URL.createObjectURL(blob);
 				const alink = document.createElement('a');
 				alink.href = fileURL;
-				alink.download = 'steffen_riber_thomsen_cv.pdf';
+				alink.download = cvFile;
 				alink.click();
 			});
 		});
@@ -27,7 +28,7 @@ export const CVLayout = () => {
 	return (
 		<>
 			<div className={`relative ${isMobile ? 'document-mobile' : ''}`}>
-				<Document file='./steffen_riber_thomsen_cv.pdf' options={opts}>
+				<Document file={`/${cvFile}`} options={opts}>
 					<Page pageNumber={1} className={'pdf-page'} />
 					<Page pageNumber={2} className={'pdf-page'} />
 				</Document>

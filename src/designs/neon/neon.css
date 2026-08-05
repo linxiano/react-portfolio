@@ -1,0 +1,785 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   D / NEON — after hours
+   The original site's idea kept: one lit glass console floating
+   in a coloured dark. Its tokens kept too — ink, panel, hairline
+   and accent are lifted verbatim from index.css, and the photo is
+   the same one, downscaled. What changed is that there is now room
+   to actually say something.
+   ============================================================ */
+
+.neon {
+	/* his */
+	--ink: #edf2f4;
+	--glass: rgba(16, 18, 27, 0.5);
+	--hair: rgba(113, 119, 144, 0.2);
+	--neon: #ff0076;
+	--neon-soft: rgba(255, 0, 118, 0.34);
+
+	/* the teal-black in the shadows of his background photo */
+	--night: #04080c;
+	--glass-2: rgba(16, 18, 27, 0.74);
+	--ink-dim: #93a1ad;
+	--ink-faint: #5e6b77;
+	/* the green traffic light in that same photo */
+	--cool: #35c7e0;
+
+	position: relative;
+	min-height: 100vh;
+	background: var(--night);
+	color: var(--ink);
+	font-family: 'Public Sans', system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.62;
+}
+
+.neon ::selection {
+	background: var(--neon);
+	color: #fff;
+}
+
+.neon a {
+	color: inherit;
+}
+
+.neon :focus-visible {
+	outline: 2px solid var(--cool);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+/* ============================================================
+   the field — fixed, so the console glides over it
+   ============================================================ */
+.neon-field {
+	position: fixed;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* The original photograph, pushed back until it is light and texture
+   rather than a scene competing with the text. It also gives the glass
+   something real to refract — blur over a gradient is close to a no-op. */
+.neon-photo {
+	position: absolute;
+	inset: -4%;
+	background-image: url('../../Components/InteractiveBackground/night.jpg');
+	background-size: cover;
+	background-position: center 62%;
+	filter: saturate(0.92) brightness(0.78) contrast(1.04);
+	transform: translate3d(calc(var(--mx, 0) * -22px), calc(var(--my, 0) * -22px), 0) scale(1.04);
+	transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: transform;
+}
+
+/* sink the midtones toward the night base so type stays legible */
+.neon-scrim {
+	position: absolute;
+	inset: 0;
+	/* Text sits on the console, so this only has to calm the margins. */
+	background:
+		radial-gradient(ellipse 74% 58% at 50% 42%, rgba(4, 8, 12, 0.22), rgba(4, 8, 12, 0.58) 74%),
+		linear-gradient(to bottom, rgba(4, 8, 12, 0.34), rgba(4, 8, 12, 0.12) 45%, rgba(4, 8, 12, 0.48));
+}
+
+.neon-blob {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(72px);
+	/* --mx/--my are set from the pointer; the parallax is a few px, not a swoop */
+	transform: translate3d(calc(var(--mx, 0) * var(--depth, 20px)), calc(var(--my, 0) * var(--depth, 20px)), 0);
+	transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: transform;
+}
+
+/* The photo supplies magenta, cyan and sodium already. This is only the
+   light the sign throws back onto the top of the console. */
+.neon-blob-a {
+	--depth: 26px;
+	top: -22vh;
+	left: -10vw;
+	width: 46vmax;
+	height: 46vmax;
+	background: radial-gradient(circle, rgba(255, 0, 118, 0.4), rgba(255, 0, 118, 0.13) 40%, rgba(255, 0, 118, 0) 68%);
+	animation: neon-drift-a 34s ease-in-out infinite alternate;
+}
+
+@keyframes neon-drift-a {
+	to {
+		translate: 6vw 4vh;
+	}
+}
+
+/* ============================================================
+   the console
+   ============================================================ */
+.neon-shell {
+	position: relative;
+	z-index: 1;
+	max-width: 924px;
+	margin: 0 auto;
+	padding: 46px 20px 120px;
+}
+
+.neon-console {
+	background: rgba(9, 12, 19, 0.6);
+	backdrop-filter: blur(26px) saturate(150%);
+	-webkit-backdrop-filter: blur(26px) saturate(150%);
+	border: 1px solid var(--hair);
+	border-top-color: rgba(255, 255, 255, 0.12);
+	border-radius: 18px;
+	overflow: hidden;
+}
+
+.neon-mono {
+	font-family: 'JetBrains Mono', ui-monospace, monospace;
+	font-size: 0.74rem;
+	letter-spacing: 0.04em;
+	font-variant-numeric: tabular-nums;
+}
+
+.neon-label {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.66rem;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.neon-wide {
+	font-family: Archivo, system-ui, sans-serif;
+	font-variation-settings:
+		'wdth' 112,
+		'wght' 800;
+}
+
+/* ============================================================
+   SIGNATURE — the sign switches on.
+   index.css already carried a `border-flicker` keyframe that the
+   site never used: a glowing border striking like a neon tube.
+   This is that idea, finished, and run once instead of forever.
+   ============================================================ */
+.neon-bar {
+	display: flex;
+	align-items: center;
+	gap: 22px;
+	flex-wrap: wrap;
+	padding: 30px 34px;
+	border-bottom: 1px solid var(--hair);
+}
+
+.neon-sign {
+	display: inline-block;
+	padding: 11px 21px 12px;
+	border: 1.5px solid var(--neon);
+	border-radius: 11px;
+	box-shadow:
+		0 0 78px 10px var(--neon-soft),
+		inset 0 0 22px rgba(255, 0, 118, 0.2);
+	animation: neon-strike 2.4s linear both;
+}
+
+.neon-sign span {
+	font-family: Archivo, sans-serif;
+	font-variation-settings:
+		'wdth' 118,
+		'wght' 700;
+	font-size: 1.32rem;
+	letter-spacing: 0.34em;
+	/* real neon has a white-hot core inside a coloured halo */
+	color: #ffeaf4;
+	text-shadow:
+		0 0 4px #ff0076,
+		0 0 13px #ff0076,
+		0 0 34px rgba(255, 0, 118, 0.82),
+		0 0 66px rgba(255, 0, 118, 0.45);
+}
+
+/* his timing, from the border-flicker keyframe */
+@keyframes neon-strike {
+	0% {
+		opacity: 0.1;
+	}
+	2% {
+		opacity: 1;
+	}
+	4% {
+		opacity: 0.1;
+	}
+	8% {
+		opacity: 1;
+	}
+	11% {
+		opacity: 0.25;
+	}
+	14% {
+		opacity: 1;
+	}
+	70% {
+		opacity: 0.72;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.neon-nav {
+	margin-left: auto;
+	display: flex;
+	align-items: baseline;
+	gap: 6px 24px;
+	flex-wrap: wrap;
+}
+
+.neon-nav a {
+	text-decoration: none;
+	color: var(--ink-dim);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	border-bottom: 1px solid transparent;
+	padding-bottom: 2px;
+	transition: color 150ms ease;
+}
+
+.neon-nav a:hover {
+	color: var(--cool);
+	border-bottom-color: var(--cool);
+}
+
+/* the address is a different kind of link, so it does not look like a section.
+   Specificity beats `.neon-nav a` on its own, so no !important needed. */
+.neon-nav a.neon-nav-mail {
+	position: relative;
+	margin-left: 10px;
+	text-transform: none;
+	letter-spacing: 0.03em;
+	color: var(--ink-faint);
+}
+
+/* The divider is a pseudo-element in the gap, not padding on the link. As
+   padding it sat inside the box, so the hover underline ran wider than the
+   text by the full inset. */
+.neon-nav a.neon-nav-mail::before {
+	content: '';
+	position: absolute;
+	left: -17px;
+	top: 50%;
+	width: 1px;
+	height: 1.1em;
+	transform: translateY(-50%);
+	background: var(--hair);
+}
+
+.neon-nav a.neon-nav-mail:hover {
+	color: var(--neon);
+	border-bottom-color: var(--neon);
+}
+
+/* anchors land with the heading clear of the console's top edge */
+.neon-section[id] {
+	scroll-margin-top: 18px;
+}
+
+/* html is the scroller, not .neon — scope it to this direction via :has */
+@media (prefers-reduced-motion: no-preference) {
+	:root:has(.neon) {
+		scroll-behavior: smooth;
+	}
+}
+
+/* ============================================================
+   intro
+   ============================================================ */
+.neon-section {
+	padding: 40px 34px;
+	border-bottom: 1px solid var(--hair);
+}
+
+.neon-section:last-child {
+	border-bottom: 0;
+}
+
+.neon-intro {
+	display: grid;
+	grid-template-columns: 162px minmax(0, 1fr);
+	gap: 36px;
+	align-items: center;
+	padding-top: 44px;
+	padding-bottom: 44px;
+}
+
+/* The original framing: the full figure at its own aspect, blob-cropped at
+   43%, sitting on a ringed circle. Both of them stay in frame. */
+.neon-portrait {
+	margin: 0;
+	position: relative;
+	width: 162px;
+	aspect-ratio: 386 / 646;
+}
+
+/* the ringed circle the figure stands on */
+.neon-portrait::before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	width: 156px;
+	height: 156px;
+	transform: translateX(-50%);
+	border-radius: 50%;
+	border: 1px solid var(--neon-soft);
+	background: rgba(0, 0, 0, 0.32);
+	box-shadow: 0 0 48px rgba(255, 0, 118, 0.22);
+}
+
+.neon-portrait img {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center bottom;
+	border-radius: 43%;
+}
+
+.neon-hi {
+	margin: 0;
+	font-family: Archivo, sans-serif;
+	font-variation-settings:
+		'wdth' 108,
+		'wght' 800;
+	font-size: clamp(2.1rem, 5.4vw, 3.2rem);
+	line-height: 1.02;
+	letter-spacing: -0.022em;
+}
+
+.neon-hi small {
+	display: block;
+	margin-top: 12px;
+	font-family: 'JetBrains Mono', monospace;
+	font-variation-settings: normal;
+	font-size: 0.75rem;
+	font-weight: 400;
+	letter-spacing: 0.03em;
+	line-height: 1.6;
+	color: var(--ink-dim);
+}
+
+.neon-thesis {
+	margin: 16px 0 0;
+	font-size: 1.06rem;
+	max-width: 46ch;
+	color: var(--ink);
+}
+
+.neon-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+	margin: 20px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.neon-tags li {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.7rem;
+	padding: 4px 11px;
+	border: 1px solid var(--neon-soft);
+	border-radius: 999px;
+	color: #ffd6ea;
+	background: rgba(255, 0, 118, 0.08);
+}
+
+/* ============================================================
+   the "by" table — his construction, given a proper setting
+   ============================================================ */
+.neon-by {
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0 40px;
+}
+
+.neon-by div {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	padding: 9px 0;
+	border-bottom: 1px dotted rgba(113, 119, 144, 0.28);
+}
+
+.neon-by dt {
+	font-weight: 600;
+	font-size: 1rem;
+	white-space: nowrap;
+}
+
+.neon-by dd {
+	margin: 0 0 0 auto;
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.74rem;
+	color: var(--neon);
+	white-space: nowrap;
+}
+
+/* ============================================================
+   sections
+   ============================================================ */
+.neon-head {
+	display: flex;
+	align-items: baseline;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-bottom: 22px;
+}
+
+.neon-head h2 {
+	margin: 0;
+	font-family: Archivo, sans-serif;
+	font-variation-settings:
+		'wdth' 112,
+		'wght' 700;
+	font-size: 1.12rem;
+	letter-spacing: 0.02em;
+}
+
+.neon-head .neon-mono {
+	margin-left: auto;
+	color: var(--ink-faint);
+}
+
+/* roles */
+.neon-roles {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.neon-role {
+	display: grid;
+	grid-template-columns: 106px minmax(0, 1fr);
+	gap: 24px;
+	padding: 19px 0;
+	border-top: 1px solid var(--hair);
+}
+
+.neon-role:first-child {
+	border-top: 0;
+	padding-top: 4px;
+}
+
+.neon-role-when {
+	color: var(--ink-faint);
+	padding-top: 4px;
+}
+
+.neon-role h3 {
+	margin: 0;
+	font-size: 1.06rem;
+	font-weight: 600;
+	letter-spacing: -0.008em;
+}
+
+.neon-role h3 em {
+	font-style: normal;
+	font-weight: 400;
+	color: var(--ink-dim);
+}
+
+.neon-role p {
+	margin: 6px 0 0;
+	color: var(--ink-dim);
+	font-size: 0.96rem;
+	max-width: 66ch;
+}
+
+.neon-role ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px 14px;
+	margin: 11px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.neon-role ul li {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.68rem;
+	color: var(--ink-faint);
+}
+
+.neon-role ul li::before {
+	content: '· ';
+	color: var(--neon);
+}
+
+/* stack */
+/* Six groups. The count is explicit rather than auto-fit so it always divides
+   evenly and never orphans the last group on a row of its own. */
+.neon-stack {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 26px 24px;
+}
+
+@media (max-width: 900px) {
+	.neon-stack {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.neon-stack ul {
+	list-style: none;
+	margin: 10px 0 0;
+	padding: 0;
+}
+
+.neon-stack li {
+	font-size: 0.94rem;
+	padding: 3px 0;
+	color: var(--ink);
+}
+
+/* record */
+.neon-record {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+	align-items: start;
+	gap: 26px 34px;
+}
+
+.neon-degree h3 {
+	margin: 8px 0 0;
+	font-size: 1.02rem;
+	font-weight: 600;
+}
+
+.neon-degree p {
+	margin: 4px 0 0;
+	color: var(--ink-faint);
+}
+
+.neon-degree blockquote {
+	margin: 11px 0 0;
+	padding-left: 13px;
+	border-left: 2px solid var(--neon-soft);
+	font-size: 0.92rem;
+	color: var(--ink-dim);
+}
+
+.neon-rec {
+	display: grid;
+	grid-template-columns: 46px minmax(0, 1fr);
+	gap: 14px;
+	margin: 0;
+	padding: 11px 0;
+	border-bottom: 1px dotted rgba(113, 119, 144, 0.24);
+}
+
+.neon-rec dt {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.74rem;
+	color: var(--cool);
+}
+
+.neon-rec dd {
+	margin: 0;
+}
+
+.neon-rec dd b {
+	display: block;
+	font-weight: 600;
+	font-size: 0.95rem;
+}
+
+.neon-rec dd span {
+	color: var(--ink-faint);
+	font-size: 0.87rem;
+}
+
+/* built */
+.neon-work {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 18px;
+}
+
+.neon-card {
+	display: block;
+	text-decoration: none;
+	border: 1px solid var(--hair);
+	border-radius: 12px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.02);
+	transition:
+		border-color 200ms ease,
+		transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.neon-card:hover {
+	border-color: var(--neon-soft);
+	transform: translateY(-3px);
+}
+
+.neon-card-frame {
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #05090d;
+	border-bottom: 1px solid var(--hair);
+}
+
+.neon-card-frame img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top left;
+	opacity: 0.76;
+	transition:
+		opacity 300ms ease,
+		transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.neon-card:hover .neon-card-frame img {
+	opacity: 1;
+	transform: scale(1.04);
+}
+
+.neon-card-body {
+	padding: 13px 16px 16px;
+}
+
+.neon-card-body h3 {
+	margin: 0;
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.neon-card-body h3 span {
+	margin-left: auto;
+	color: var(--neon);
+	white-space: nowrap;
+}
+
+.neon-card-body p {
+	margin: 5px 0 0;
+	color: var(--ink-faint);
+	font-size: 0.91rem;
+}
+
+/* footer bar, mirroring the top */
+.neon-foot {
+	display: flex;
+	align-items: center;
+	gap: 12px 26px;
+	flex-wrap: wrap;
+	padding: 22px 34px;
+	background: var(--glass-2);
+	border-top: 1px solid var(--hair);
+}
+
+.neon-foot a {
+	text-decoration: none;
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.78rem;
+	color: var(--ink-dim);
+	border-bottom: 1px solid transparent;
+}
+
+.neon-foot a:hover {
+	color: var(--neon);
+	border-bottom-color: var(--neon);
+}
+
+.neon-foot-personal {
+	margin: 0 0 0 auto;
+	color: var(--ink-faint);
+	font-size: 0.86rem;
+}
+
+/* ============================================================
+   responsive
+   ============================================================ */
+@media (max-width: 720px) {
+	/* top padding clears the fixed version switch, as it does on desktop */
+	.neon-shell {
+		padding: 46px 12px 90px;
+	}
+
+	.neon-console {
+		border-radius: 14px;
+	}
+
+	.neon-bar,
+	.neon-section,
+	.neon-foot {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.neon-intro {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 24px;
+	}
+
+	.neon-by {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.neon-role {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 8px;
+	}
+
+	.neon-nav {
+		margin-left: 0;
+		width: 100%;
+		gap: 10px 20px;
+	}
+
+	/* the divider reads as a stray tick once the nav wraps to its own line */
+	.neon-nav a.neon-nav-mail {
+		margin-left: 0;
+	}
+
+	.neon-nav a.neon-nav-mail::before {
+		display: none;
+	}
+
+	.neon-foot-personal {
+		margin-left: 0;
+	}
+
+	/* blur over a full-bleed gradient is expensive on phones */
+	.neon-console {
+		backdrop-filter: blur(16px) saturate(130%);
+		-webkit-backdrop-filter: blur(16px) saturate(130%);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.neon-sign {
+		animation: none;
+	}
+
+	.neon-blob,
+	.neon-photo {
+		animation: none;
+		transition: none;
+		transform: none;
+	}
+
+	.neon-card,
+	.neon-card-frame img {
+		transition: none;
+	}
+
+	.neon-card:hover {
+		transform: none;
+	}
+}

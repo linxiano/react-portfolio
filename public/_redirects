@@ -1,0 +1,3 @@
+# SPA fallback so /design/* resolves when deployed. The live site at /
+# uses MemoryRouter and is unaffected.
+/*  /index.html  200

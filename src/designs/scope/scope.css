@@ -1,0 +1,713 @@
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   B / SCOPE — air traffic console
+   Modern ATC displays are not phosphor green on black. They are
+   desaturated slate, with luminance doing the work and colour
+   reserved for meaning: white is symbology, magenta is the
+   selected track, amber is attention.
+   ============================================================ */
+
+.scope {
+	--void: #0a1418;
+	--panel: #0f1e24;
+	--panel-2: #142831;
+	--ring: #1f3d47;
+	--hair: #24444f;
+	--sym: #dfe9ec;
+	--sym-2: #7e9aa3;
+	--sym-3: #4d6b75;
+	--mag: #ff2e88;
+	--amber: #f0a22e;
+
+	background: var(--void);
+	color: var(--sym);
+	font-family: 'Schibsted Grotesk', system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+	min-height: 100vh;
+}
+
+.scope ::selection {
+	background: var(--mag);
+	color: var(--void);
+}
+
+.scope a {
+	color: inherit;
+}
+
+.scope :focus-visible {
+	outline: 2px solid var(--mag);
+	outline-offset: 3px;
+}
+
+.scope-shell {
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 0 26px 110px;
+}
+
+.scope-data {
+	font-family: 'JetBrains Mono', ui-monospace, monospace;
+	font-size: 0.72rem;
+	letter-spacing: 0.04em;
+	font-variant-numeric: tabular-nums;
+	text-transform: uppercase;
+}
+
+.scope-label {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.66rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--sym-3);
+}
+
+/* --- status strip along the top ----------------------------- */
+.scope-bar {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	flex-wrap: wrap;
+	padding: 13px 0;
+	border-bottom: 1px solid var(--hair);
+	color: var(--sym-2);
+}
+
+.scope-bar-live {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: var(--sym);
+}
+
+.scope-bar-live i {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--mag);
+	box-shadow: 0 0 8px var(--mag);
+	animation: scope-blip 3.4s ease-in-out infinite;
+}
+
+@keyframes scope-blip {
+	0%,
+	88%,
+	100% {
+		opacity: 1;
+	}
+	94% {
+		opacity: 0.25;
+	}
+}
+
+.scope-bar-spacer {
+	margin-left: auto;
+}
+
+/* ============================================================
+   SIGNATURE — the plan position indicator.
+   One bold element. The sweep is 26 seconds and barely there;
+   it is weather, not an effect. Everything below is quiet.
+   ============================================================ */
+.scope-hero {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+	gap: 56px;
+	align-items: center;
+	padding: 60px 0 44px;
+}
+
+.scope-ppi {
+	position: relative;
+	aspect-ratio: 1;
+	max-width: 460px;
+	width: 100%;
+	justify-self: end;
+	border-radius: 50%;
+	background:
+		radial-gradient(circle at 50% 50%, rgba(31, 61, 71, 0.55) 0%, rgba(10, 20, 24, 0.2) 62%, rgba(10, 20, 24, 0) 100%),
+		var(--void);
+	overflow: hidden;
+	isolation: isolate;
+}
+
+.scope-ppi svg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.scope-ppi-ring {
+	fill: none;
+	stroke: var(--ring);
+	stroke-width: 0.4;
+}
+
+.scope-ppi-spoke {
+	stroke: var(--ring);
+	stroke-width: 0.35;
+}
+
+.scope-ppi-bearing {
+	fill: var(--sym-3);
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 2.6px;
+	letter-spacing: 0.1em;
+}
+
+.scope-ppi-range {
+	fill: var(--sym-3);
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 2.4px;
+}
+
+/* history trail: where the track has been */
+.scope-ppi-trail circle {
+	fill: var(--sym-3);
+}
+
+/* the primary track — him */
+.scope-ppi-track polygon {
+	fill: var(--mag);
+}
+
+.scope-ppi-track line {
+	stroke: var(--mag);
+	stroke-width: 0.35;
+}
+
+.scope-ppi-track text {
+	fill: var(--sym);
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 3.1px;
+	letter-spacing: 0.06em;
+}
+
+.scope-ppi-track .scope-ppi-track-2 {
+	fill: var(--sym-2);
+	font-size: 2.7px;
+}
+
+.scope-ppi-sweep {
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	/* The sharp edge is the beam at 360deg; the afterglow trails behind it,
+	   counter to the direction of rotation. */
+	background: conic-gradient(
+		from 0deg,
+		rgba(255, 46, 136, 0) 0deg,
+		rgba(255, 46, 136, 0) 242deg,
+		rgba(255, 46, 136, 0.006) 276deg,
+		rgba(255, 46, 136, 0.02) 314deg,
+		rgba(255, 46, 136, 0.05) 342deg,
+		rgba(255, 46, 136, 0.085) 360deg
+	);
+	animation: scope-sweep 26s linear infinite;
+	pointer-events: none;
+	mix-blend-mode: screen;
+	/* border-radius alone leaks past the bezel once the blend mode
+	   promotes this to its own layer. */
+	clip-path: circle(50% at 50% 50%);
+}
+
+@keyframes scope-sweep {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.scope-ppi-bezel {
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	border: 1px solid var(--hair);
+	pointer-events: none;
+}
+
+/* --- hero copy ---------------------------------------------- */
+.scope-name {
+	margin: 0;
+	font-weight: 900;
+	font-size: clamp(2.5rem, 6.6vw, 4.6rem);
+	line-height: 0.98;
+	letter-spacing: -0.04em;
+}
+
+.scope-name em {
+	font-style: normal;
+	color: var(--mag);
+}
+
+.scope-thesis {
+	margin: 26px 0 0;
+	font-size: 1.16rem;
+	max-width: 40ch;
+	color: var(--sym);
+}
+
+.scope-readout {
+	margin-top: 34px;
+	border-top: 1px solid var(--hair);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+}
+
+.scope-readout div {
+	padding: 14px 16px 14px 0;
+	border-bottom: 1px solid var(--hair);
+}
+
+.scope-readout dt {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.62rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--sym-3);
+	margin: 0 0 5px;
+}
+
+.scope-readout dd {
+	margin: 0;
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.87rem;
+	color: var(--sym);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+.scope-readout dd.is-active {
+	color: var(--mag);
+}
+
+/* --- sections ---------------------------------------------- */
+.scope-section {
+	padding-top: 62px;
+}
+
+.scope-section-head {
+	display: flex;
+	align-items: baseline;
+	gap: 18px;
+	flex-wrap: wrap;
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--sym-3);
+}
+
+.scope-section-head h2 {
+	margin: 0;
+	font-size: 1.32rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+.scope-section-head .scope-data {
+	margin-left: auto;
+	color: var(--sym-3);
+}
+
+/* --- track history: one row per post ------------------------ */
+.scope-history {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.scope-post {
+	display: grid;
+	grid-template-columns: 116px 96px minmax(0, 1fr) 190px;
+	gap: 26px;
+	padding: 26px 4px;
+	border-bottom: 1px solid var(--hair);
+	position: relative;
+	transition: background-color 150ms ease;
+}
+
+.scope-post:hover {
+	background: var(--panel);
+}
+
+/* the selected-track bar, drawn only on hover/focus */
+.scope-post::before {
+	content: '';
+	position: absolute;
+	left: -14px;
+	top: 22px;
+	bottom: 22px;
+	width: 2px;
+	background: var(--mag);
+	opacity: 0;
+	transition: opacity 150ms ease;
+}
+
+.scope-post:hover::before,
+.scope-post:focus-within::before {
+	opacity: 1;
+}
+
+.scope-post-when {
+	color: var(--sym-2);
+}
+
+.scope-post-when b {
+	color: var(--sym);
+	font-weight: 500;
+}
+
+.scope-post-ident {
+	color: var(--mag);
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.86rem;
+	letter-spacing: 0.14em;
+}
+
+.scope-post-ident small {
+	display: block;
+	color: var(--sym-3);
+	font-size: 0.66rem;
+	letter-spacing: 0.08em;
+	margin-top: 4px;
+}
+
+.scope-post h3 {
+	margin: -4px 0 0;
+	font-size: 1.16rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+}
+
+.scope-post h3 em {
+	font-style: normal;
+	font-weight: 400;
+	color: var(--sym-2);
+}
+
+.scope-post p {
+	margin: 8px 0 0;
+	color: var(--sym-2);
+	max-width: 62ch;
+	font-size: 0.97rem;
+}
+
+.scope-post-tags {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.scope-post-tags li {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.68rem;
+	letter-spacing: 0.04em;
+	color: var(--sym-2);
+	padding-left: 13px;
+	position: relative;
+}
+
+.scope-post-tags li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.6em;
+	width: 5px;
+	height: 1px;
+	background: var(--sym-3);
+}
+
+/* --- panels ------------------------------------------------- */
+.scope-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	align-items: start;
+	gap: 18px;
+	margin-top: 26px;
+}
+
+.scope-panel {
+	background: var(--panel);
+	border: 1px solid var(--hair);
+	padding: 20px 22px 22px;
+}
+
+.scope-panel h3 {
+	margin: 10px 0 0;
+	font-size: 1.06rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+}
+
+.scope-panel-meta {
+	margin: 6px 0 0;
+	color: var(--sym-3);
+}
+
+.scope-panel blockquote {
+	margin: 15px 0 0;
+	padding: 13px 15px;
+	background: var(--panel-2);
+	border-left: 2px solid var(--mag);
+	font-size: 0.95rem;
+}
+
+.scope-panel blockquote cite {
+	display: block;
+	font-style: normal;
+	margin-top: 8px;
+	font-size: 0.86rem;
+	color: var(--sym-2);
+	line-height: 1.5;
+}
+
+.scope-skills {
+	/* 300px min settles six groups into 3x2 instead of orphaning the sixth
+	   on a row of its own, and still steps down to 2 then 1 when narrow. */
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 18px;
+	margin-top: 26px;
+}
+
+.scope-skills ul {
+	list-style: none;
+	margin: 11px 0 0;
+	padding: 0;
+}
+
+.scope-skills li {
+	font-size: 0.93rem;
+	color: var(--sym);
+	padding: 5px 0;
+	border-bottom: 1px solid rgba(36, 68, 79, 0.55);
+}
+
+.scope-rec {
+	display: grid;
+	grid-template-columns: 56px minmax(0, 1fr);
+	gap: 18px;
+	padding: 15px 0;
+	border-bottom: 1px solid var(--hair);
+	margin: 0;
+}
+
+.scope-rec dt {
+	color: var(--amber);
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.78rem;
+}
+
+.scope-rec dd {
+	margin: 0;
+}
+
+.scope-rec dd b {
+	display: block;
+	font-weight: 600;
+	font-size: 0.99rem;
+}
+
+.scope-rec dd span {
+	color: var(--sym-2);
+	font-size: 0.9rem;
+}
+
+/* --- built ------------------------------------------------- */
+.scope-work {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+	gap: 18px;
+	margin-top: 26px;
+}
+
+.scope-card {
+	display: block;
+	text-decoration: none;
+	border: 1px solid var(--hair);
+	background: var(--panel);
+	transition:
+		border-color 180ms ease,
+		transform 180ms ease;
+}
+
+.scope-card:hover {
+	border-color: var(--mag);
+	transform: translateY(-2px);
+}
+
+.scope-card-frame {
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	border-bottom: 1px solid var(--hair);
+	background: var(--void);
+}
+
+.scope-card-frame img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top left;
+	opacity: 0.78;
+	transition:
+		opacity 300ms ease,
+		transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scope-card:hover .scope-card-frame img {
+	opacity: 1;
+	transform: scale(1.04);
+}
+
+.scope-card-body {
+	padding: 15px 18px 18px;
+}
+
+.scope-card-body h3 {
+	margin: 0;
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	font-size: 1.05rem;
+	font-weight: 700;
+}
+
+.scope-card-body h3 span {
+	margin-left: auto;
+	color: var(--mag);
+}
+
+.scope-card-body p {
+	margin: 6px 0 0;
+	color: var(--sym-2);
+	font-size: 0.93rem;
+}
+
+/* --- footer ------------------------------------------------ */
+.scope-foot {
+	margin-top: 84px;
+	padding-top: 24px;
+	border-top: 1px solid var(--sym-3);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+	gap: 30px;
+}
+
+.scope-foot-links {
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	margin-top: 13px;
+}
+
+.scope-foot-links a {
+	text-decoration: none;
+	display: flex;
+	gap: 14px;
+	width: fit-content;
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.82rem;
+	border-bottom: 1px solid transparent;
+}
+
+.scope-foot-links a span:first-child {
+	color: var(--sym-3);
+	min-width: 68px;
+	text-transform: uppercase;
+	font-size: 0.66rem;
+	letter-spacing: 0.16em;
+	align-self: center;
+}
+
+.scope-foot-links a:hover {
+	color: var(--mag);
+	border-bottom-color: var(--mag);
+}
+
+.scope-foot p.scope-foot-text {
+	margin-top: 13px;
+	color: var(--sym-2);
+	font-size: 0.95rem;
+	max-width: 36ch;
+}
+
+/* --- responsive -------------------------------------------- */
+@media (max-width: 1020px) {
+	.scope-hero {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 40px;
+		padding: 44px 0 20px;
+	}
+
+	.scope-ppi {
+		justify-self: start;
+		max-width: 380px;
+	}
+
+	.scope-post {
+		grid-template-columns: 110px minmax(0, 1fr);
+		gap: 8px 22px;
+	}
+
+	.scope-post-ident {
+		grid-row: 2;
+	}
+
+	.scope-post-body {
+		grid-column: 2;
+	}
+
+	.scope-post-tags {
+		grid-column: 2;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 4px 16px;
+		margin-top: 12px;
+	}
+}
+
+@media (max-width: 640px) {
+	.scope-shell {
+		padding: 0 17px 84px;
+	}
+
+	.scope-section {
+		padding-top: 56px;
+	}
+
+	.scope-post {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.scope-post-ident,
+	.scope-post-body,
+	.scope-post-tags {
+		grid-column: 1;
+	}
+
+	.scope-post-when {
+		display: flex;
+		gap: 10px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	/* No sweep, but keep a fixed beam so the scope still reads as one. */
+	.scope-ppi-sweep {
+		animation: none;
+		transform: rotate(52deg);
+	}
+
+	.scope-bar-live i {
+		animation: none;
+	}
+
+	.scope-card,
+	.scope-card-frame img,
+	.scope-post {
+		transition: none;
+	}
+}

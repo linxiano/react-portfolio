@@ -1,0 +1,667 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Saira+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   A / SECTOR — aeronautical chart
+   Cool chart base, navigation blue, aeronautical magenta.
+   Every rule is a hairline; nothing casts a shadow.
+   ============================================================ */
+
+.sector {
+	--water: #d7e2e6;
+	--land: #e9e2d1;
+	--paper: #f1f4f5;
+	--ink: #14242c;
+	--ink-2: #48606b;
+	--nav: #1d5b87;
+	--mag: #b91272;
+	--hair: #93a7b0;
+	--hair-soft: #bfced4;
+
+	background-color: var(--water);
+	color: var(--ink);
+	font-family: Archivo, system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.55;
+	min-height: 100vh;
+	/* The chart graticule: 1' grid, doubled every 5' */
+	background-image:
+		linear-gradient(to right, rgba(147, 167, 176, 0.28) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(147, 167, 176, 0.28) 1px, transparent 1px),
+		linear-gradient(to right, rgba(147, 167, 176, 0.12) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(147, 167, 176, 0.12) 1px, transparent 1px);
+	background-size:
+		140px 140px,
+		140px 140px,
+		28px 28px,
+		28px 28px;
+}
+
+.sector ::selection {
+	background: var(--mag);
+	color: var(--paper);
+}
+
+.sector a {
+	color: inherit;
+}
+
+.sector :focus-visible {
+	outline: 2px solid var(--mag);
+	outline-offset: 3px;
+}
+
+.sector-shell {
+	max-width: 1180px;
+	margin: 0 auto;
+	padding: 0 28px 96px;
+}
+
+/* --- chart label: the utility voice ------------------------- */
+.sector-label {
+	font-family: 'Saira Condensed', Archivo, sans-serif;
+	font-weight: 600;
+	font-size: 0.75rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--nav);
+}
+
+.sector-data {
+	font-family: 'IBM Plex Mono', ui-monospace, monospace;
+	font-size: 0.75rem;
+	letter-spacing: 0.02em;
+	font-variant-numeric: tabular-nums;
+}
+
+/* --- margin bar, like a chart's edge annotation ------------- */
+.sector-margin {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 20px;
+	flex-wrap: wrap;
+	padding: 14px 0 12px;
+	border-bottom: 1px solid var(--ink);
+}
+
+.sector-margin-lot {
+	display: flex;
+	gap: 22px;
+	flex-wrap: wrap;
+	color: var(--ink-2);
+}
+
+.sector-margin strong {
+	color: var(--ink);
+	font-weight: 500;
+}
+
+/* --- masthead ---------------------------------------------- */
+.sector-head {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 232px;
+	gap: 48px;
+	align-items: end;
+	padding: 40px 0 34px;
+	border-bottom: 1px solid var(--hair);
+}
+
+.sector-name {
+	font-weight: 800;
+	font-size: clamp(2.5rem, 6.6vw, 5rem);
+	line-height: 0.92;
+	letter-spacing: -0.035em;
+	margin: 0;
+	text-wrap: balance;
+}
+
+.sector-name span {
+	display: block;
+}
+
+/* The one place magenta gets to be large */
+.sector-name .sector-name-surname {
+	color: var(--mag);
+}
+
+.sector-thesis {
+	max-width: 46ch;
+	margin: 26px 0 0;
+	font-size: 1.075rem;
+	color: var(--ink);
+}
+
+.sector-role {
+	margin: 0 0 18px;
+}
+
+/* portrait, framed like a chart inset */
+.sector-inset {
+	border: 1px solid var(--ink);
+	background: var(--land);
+	padding: 7px;
+}
+
+.sector-inset img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	object-position: center 16%;
+	filter: grayscale(1) contrast(1.06);
+	mix-blend-mode: multiply;
+}
+
+.sector-inset figcaption {
+	margin-top: 7px;
+	padding-top: 6px;
+	border-top: 1px solid var(--hair);
+	color: var(--ink-2);
+}
+
+/* --- section scaffolding ----------------------------------- */
+.sector-section {
+	padding-top: 56px;
+}
+
+.sector-section-head {
+	display: flex;
+	align-items: baseline;
+	gap: 16px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid var(--ink);
+}
+
+.sector-section-head h2 {
+	font-family: 'Saira Condensed', sans-serif;
+	font-weight: 700;
+	font-size: 1.05rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.sector-section-note {
+	margin-left: auto;
+	color: var(--ink-2);
+}
+
+/* ============================================================
+   SIGNATURE — the climb profile.
+   Career plotted as an altitude profile: seniority is flight
+   level, the x-axis is real time. The route draws itself once.
+   ============================================================ */
+.sector-profile {
+	position: relative;
+	margin-top: 26px;
+	background: var(--paper);
+	border: 1px solid var(--hair);
+}
+
+/* A chart is allowed to be wider than the phone holding it. */
+.sector-profile-scroll {
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+}
+
+.sector-profile svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	min-width: 660px;
+}
+
+.sector-profile-grid {
+	stroke: var(--hair-soft);
+	stroke-width: 1;
+}
+
+.sector-profile-fl {
+	fill: var(--ink-2);
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 9px;
+	letter-spacing: 0.04em;
+}
+
+.sector-profile-year {
+	fill: var(--ink-2);
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 9.5px;
+}
+
+.sector-profile-track {
+	fill: none;
+	stroke: var(--mag);
+	stroke-width: 2;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	stroke-dasharray: var(--len) var(--len);
+	stroke-dashoffset: var(--len);
+	animation: sector-draw 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+.sector-profile-shade {
+	fill: rgba(185, 18, 114, 0.07);
+	opacity: 0;
+	animation: sector-fade 1.4s ease 1.9s forwards;
+}
+
+.sector-profile-fix {
+	opacity: 0;
+	animation: sector-fade 0.5s ease forwards;
+}
+
+.sector-profile-fix line {
+	stroke: var(--nav);
+	stroke-width: 1;
+	stroke-dasharray: 2 3;
+}
+
+.sector-profile-fix circle {
+	fill: var(--paper);
+	stroke: var(--mag);
+	stroke-width: 2;
+}
+
+.sector-profile-fix polygon {
+	fill: var(--paper);
+	stroke: var(--nav);
+	stroke-width: 1.5;
+}
+
+.sector-profile-fix text {
+	font-family: 'Saira Condensed', sans-serif;
+	font-weight: 700;
+	font-size: 11px;
+	letter-spacing: 0.11em;
+	fill: var(--ink);
+}
+
+.sector-profile-fix .sector-profile-fix-fl {
+	font-family: 'IBM Plex Mono', monospace;
+	font-weight: 400;
+	font-size: 9px;
+	letter-spacing: 0.02em;
+	fill: var(--mag);
+}
+
+@keyframes sector-draw {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes sector-fade {
+	to {
+		opacity: 1;
+	}
+}
+
+.sector-profile-legend {
+	display: flex;
+	gap: 26px;
+	flex-wrap: wrap;
+	padding: 10px 14px;
+	border-top: 1px solid var(--hair);
+	color: var(--ink-2);
+}
+
+.sector-profile-legend b {
+	color: var(--ink);
+	font-weight: 500;
+}
+
+/* --- the log: one row per post ------------------------------ */
+.sector-log {
+	margin-top: 34px;
+	border-top: 1px solid var(--hair);
+}
+
+.sector-post {
+	display: grid;
+	grid-template-columns: 92px 128px minmax(0, 1fr);
+	gap: 28px;
+	padding: 24px 0;
+	border-bottom: 1px solid var(--hair);
+}
+
+.sector-post-when {
+	color: var(--ink-2);
+	padding-top: 3px;
+}
+
+.sector-post-when b {
+	display: block;
+	color: var(--ink);
+	font-weight: 500;
+}
+
+.sector-post-fix {
+	padding-top: 2px;
+}
+
+.sector-post-fix .sector-ident {
+	font-family: 'Saira Condensed', sans-serif;
+	font-weight: 700;
+	font-size: 1.02rem;
+	letter-spacing: 0.16em;
+	color: var(--mag);
+	display: block;
+}
+
+.sector-post-fix small {
+	display: block;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 0.7rem;
+	color: var(--ink-2);
+	letter-spacing: 0.02em;
+	margin-top: 3px;
+}
+
+.sector-post-body h3 {
+	margin: 0;
+	font-size: 1.16rem;
+	font-weight: 600;
+	letter-spacing: -0.012em;
+}
+
+.sector-post-body h3 em {
+	font-style: normal;
+	color: var(--ink-2);
+	font-weight: 400;
+}
+
+.sector-post-body p {
+	margin: 8px 0 0;
+	max-width: 68ch;
+	color: #23383f;
+}
+
+.sector-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 14px;
+	list-style: none;
+	padding: 0;
+}
+
+.sector-tags li {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 0.68rem;
+	letter-spacing: 0.03em;
+	padding: 3px 8px;
+	border: 1px solid var(--hair);
+	background: var(--paper);
+	color: var(--ink-2);
+}
+
+/* --- two-column plate for education / recognition ---------- */
+.sector-plates {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 0 56px;
+}
+
+.sector-degree {
+	padding: 22px 0;
+	border-bottom: 1px solid var(--hair);
+}
+
+.sector-degree:first-child {
+	padding-top: 26px;
+}
+
+.sector-degree h3 {
+	margin: 0;
+	font-size: 1.08rem;
+	font-weight: 600;
+}
+
+.sector-degree-meta {
+	color: var(--ink-2);
+	margin-top: 4px;
+}
+
+.sector-degree blockquote {
+	margin: 12px 0 0;
+	padding-left: 14px;
+	border-left: 2px solid var(--mag);
+	font-size: 0.95rem;
+}
+
+.sector-degree blockquote cite {
+	font-style: normal;
+	display: block;
+	color: var(--ink-2);
+	font-size: 0.85rem;
+	margin-top: 6px;
+	line-height: 1.45;
+}
+
+.sector-rec {
+	display: grid;
+	grid-template-columns: 52px minmax(0, 1fr);
+	gap: 18px;
+	padding: 16px 0;
+	border-bottom: 1px solid var(--hair);
+}
+
+.sector-rec:first-child {
+	padding-top: 26px;
+}
+
+.sector-rec dt {
+	color: var(--mag);
+}
+
+.sector-rec dd {
+	margin: 0;
+}
+
+.sector-rec dd b {
+	font-weight: 600;
+	display: block;
+	font-size: 0.98rem;
+}
+
+.sector-rec dd span {
+	color: var(--ink-2);
+	font-size: 0.9rem;
+}
+
+/* --- legend grid for capability ----------------------------- */
+.sector-legend {
+	/* 300px min settles six groups into 3x2 instead of orphaning the sixth
+	   on a row of its own, and still steps down to 2 then 1 when narrow. */
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	margin-top: 26px;
+	border: 1px solid var(--hair);
+	background: var(--paper);
+}
+
+.sector-legend-cell {
+	padding: 16px 18px 18px;
+	border-right: 1px solid var(--hair);
+	border-bottom: 1px solid var(--hair);
+}
+
+.sector-legend-cell ul {
+	list-style: none;
+	margin: 10px 0 0;
+	padding: 0;
+}
+
+.sector-legend-cell li {
+	font-size: 0.92rem;
+	padding: 3px 0;
+	border-bottom: 1px dotted var(--hair-soft);
+}
+
+.sector-legend-cell li:last-child {
+	border-bottom: 0;
+}
+
+/* --- work / charts ----------------------------------------- */
+.sector-work {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 26px;
+	margin-top: 28px;
+}
+
+.sector-card {
+	display: block;
+	text-decoration: none;
+	border: 1px solid var(--ink);
+	background: var(--paper);
+	padding: 7px;
+	transition: transform 180ms ease;
+}
+
+.sector-card:hover {
+	transform: translateY(-3px);
+}
+
+.sector-card-frame {
+	overflow: hidden;
+	border-bottom: 1px solid var(--hair);
+	aspect-ratio: 16 / 9;
+	background: var(--land);
+}
+
+.sector-card-frame img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top left;
+	transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sector-card:hover .sector-card-frame img {
+	transform: scale(1.045);
+}
+
+.sector-card-meta {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	padding: 11px 4px 2px;
+}
+
+.sector-card-meta h3 {
+	margin: 0;
+	font-size: 1.04rem;
+	font-weight: 600;
+}
+
+.sector-card-meta .sector-data {
+	margin-left: auto;
+	color: var(--mag);
+	white-space: nowrap;
+}
+
+.sector-card p {
+	margin: 4px 4px 6px;
+	color: var(--ink-2);
+	font-size: 0.93rem;
+}
+
+/* --- footer ------------------------------------------------ */
+.sector-foot {
+	margin-top: 78px;
+	padding-top: 20px;
+	border-top: 1px solid var(--ink);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 28px;
+	align-items: start;
+}
+
+.sector-foot-contact {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sector-foot-contact a {
+	text-decoration: none;
+	display: flex;
+	gap: 12px;
+	align-items: baseline;
+	width: fit-content;
+	border-bottom: 1px solid transparent;
+}
+
+.sector-foot-contact a:hover {
+	border-bottom-color: var(--mag);
+	color: var(--mag);
+}
+
+.sector-foot-contact a span:first-child {
+	color: var(--nav);
+	min-width: 74px;
+}
+
+.sector-foot-personal {
+	color: var(--ink-2);
+	max-width: 34ch;
+	font-size: 0.95rem;
+}
+
+/* --- responsive -------------------------------------------- */
+@media (max-width: 900px) {
+	.sector-head {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 32px;
+		align-items: start;
+		padding-top: 40px;
+	}
+
+	.sector-inset {
+		max-width: 190px;
+	}
+}
+
+@media (max-width: 680px) {
+	.sector-shell {
+		padding: 0 18px 72px;
+	}
+
+	.sector-post {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 10px;
+	}
+
+	.sector-post-when {
+		display: flex;
+		gap: 10px;
+	}
+
+	.sector-post-when b {
+		display: inline;
+	}
+
+	.sector-section {
+		padding-top: 54px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sector-profile-track {
+		animation: none;
+		stroke-dashoffset: 0;
+	}
+
+	.sector-profile-shade,
+	.sector-profile-fix {
+		animation: none;
+		opacity: 1;
+	}
+
+	.sector-card,
+	.sector-card-frame img {
+		transition: none;
+	}
+}
