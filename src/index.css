@@ -44,11 +44,6 @@
 }
 
 @layer base {
-	html,
-	body {
-		overflow: hidden;
-	}
-
 	body {
 		margin: 0;
 		height: -webkit-fill-available;
@@ -63,6 +58,14 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
+}
+
+/* v1 is one fixed card sized to fit the viewport, so it must not scroll.
+   v2 is a normal scrolling page. index.html sets the attribute before first
+   paint so neither version flashes the wrong overflow. */
+html[data-app-version='v1'],
+html[data-app-version='v1'] body {
+	overflow: hidden;
 }
 
 /* Custom scrollbar */

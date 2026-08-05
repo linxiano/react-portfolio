@@ -1,0 +1,99 @@
+/* Deliberately neutral: the switcher is scaffolding for choosing a
+   direction, not part of any of them. */
+
+/* index.css locks `html, body { overflow: hidden }` for the old full-screen
+   card. Both need releasing — resetting body alone leaves the root clipped,
+   which kills wheel and scrollbar while still allowing window.scrollTo. */
+html.design-preview,
+body.design-preview {
+	overflow: auto;
+	height: auto;
+}
+
+body.design-preview {
+	font-family: system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+.switcher {
+	position: fixed;
+	z-index: 50;
+	bottom: 18px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: stretch;
+	gap: 2px;
+	padding: 4px;
+	border-radius: 999px;
+	background: rgba(10, 10, 12, 0.82);
+	backdrop-filter: blur(14px);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+	font-family: ui-monospace, 'SF Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	max-width: calc(100vw - 24px);
+}
+
+.switcher-tag {
+	display: flex;
+	align-items: center;
+	padding: 0 12px 0 14px;
+	color: rgba(255, 255, 255, 0.42);
+	white-space: nowrap;
+}
+
+.switcher a {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	padding: 8px 15px;
+	border-radius: 999px;
+	color: rgba(255, 255, 255, 0.66);
+	text-decoration: none;
+	white-space: nowrap;
+	transition:
+		background-color 140ms ease,
+		color 140ms ease;
+}
+
+.switcher a:hover {
+	color: #fff;
+	background: rgba(255, 255, 255, 0.09);
+}
+
+.switcher a.is-current {
+	color: #0a0a0c;
+	background: #fff;
+}
+
+.switcher a b {
+	font-weight: 400;
+	opacity: 0.55;
+}
+
+.switcher a.is-current b {
+	opacity: 0.45;
+}
+
+.switcher :focus-visible {
+	outline: 2px solid #ff2e88;
+	outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+	.switcher-tag {
+		display: none;
+	}
+
+	.switcher a {
+		padding: 8px 12px;
+	}
+
+	.switcher a b {
+		display: none;
+	}
+}

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { isBrowser } from 'react-device-detect';
-import bg from './bg.jpg';
+// bg.jpg is the 5448px original, kept as the master. night.jpg is the 2560px
+// derivative that actually ships — the source was 3.7 MB on every page load.
+import bg from './night.jpg';
 
 export const InteractiveBackground = () => {
 	const elementRef = useRef<HTMLDivElement>(null);

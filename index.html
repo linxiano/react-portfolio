@@ -42,6 +42,19 @@ Java, JavaScript/TypeScript, React, React-Native, Frontend, Backend, Fullstack, 
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
+		<!-- Resolve the site version before first paint. v1 locks scrolling and
+		     v2 does not, so doing this in React would flash the wrong one. -->
+		<script>
+			(function () {
+				var v = 'v2';
+				try {
+					if (localStorage.getItem('riber:version') === 'v1') v = 'v1';
+				} catch (e) {
+					/* blocked storage — keep the default */
+				}
+				document.documentElement.dataset.appVersion = v;
+			})();
+		</script>
 		<script type="module" src="/src/index.tsx"></script>
 	</body>
 </html>
