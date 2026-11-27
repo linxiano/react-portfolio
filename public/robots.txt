@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.riber.dev/sitemap.xml
+Sitemap: https://riber.dev/sitemap.xml
